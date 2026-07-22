@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aventura 360 · Vive Guatapé al máximo</title>
+<meta name="description" content="Helicóptero, lancha, jetsky, wakeboard, cuatrimotos y parapente en Guatapé, Colombia. Armamos tu día de aventura en el embalse y reservás por WhatsApp.">
+<link rel="preload" as="image" href="./img/img1.webp" type="image/webp">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --water-deep:#08312F;
+    --water:#0D544E;
+    --water-bright:#12857A;
+    --sand:#F6F1E7;
+    --sand-2:#EDE4D3;
+    --ink:#13201E;
+    --ink-soft:#42514E;
+    --amber:#EC7A22;
+    --amber-deep:#D66412;
+    --lime:#9BBE33;
+    --line:rgba(19,32,30,.12);
+    --card:#FFFFFF;
+    --wa:#25D366;
+    --shadow:0 18px 50px -22px rgba(8,49,47,.55);
+    --shadow-sm:0 8px 24px -16px rgba(8,49,47,.6);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--ink);
+    background:var(--sand);
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,.display{font-family:'Bricolage Grotesque',sans-serif;line-height:1.02;letter-spacing:-.02em}
+  a{color:inherit;text-decoration:none}
+  img{max-width:100%;display:block}
+  .wrap{width:min(1180px,92vw);margin:0 auto}
+  .eyebrow{
+    font-size:.74rem;font-weight:600;letter-spacing:.22em;text-transform:uppercase;
+    color:var(--water-bright);display:inline-flex;align-items:center;gap:.6rem;
+  }
+  .eyebrow::before{content:"";width:26px;height:2px;background:var(--amber);border-radius:2px}
+
+  .btn{
+    display:inline-flex;align-items:center;gap:.55rem;font-weight:600;font-size:.98rem;
+    padding:.95rem 1.5rem;border-radius:100px;border:1.5px solid transparent;
+    transition:transform .18s ease, box-shadow .18s ease, background .18s ease;cursor:pointer;
+  }
+  .btn svg{width:19px;height:19px;flex:none}
+  .btn-wa{background:var(--wa);color:#052e18;box-shadow:0 10px 26px -12px rgba(37,211,102,.8)}
+  .btn-wa:hover{transform:translateY(-2px);box-shadow:0 16px 34px -12px rgba(37,211,102,.85)}
+  .btn-ghost{border-color:var(--line);color:var(--ink);background:transparent}
+  .btn-ghost:hover{border-color:var(--water);background:#fff}
+  .btn-amber{background:var(--amber);color:#fff;box-shadow:0 12px 28px -12px rgba(236,122,34,.75)}
+  .btn-amber:hover{transform:translateY(-2px);background:var(--amber-deep)}
+
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(246,241,231,.82);backdrop-filter:blur(12px);
+    border-bottom:1px solid transparent;transition:border-color .3s, box-shadow .3s;
+  }
+  header.scrolled{border-color:var(--line);box-shadow:0 6px 24px -20px rgba(8,49,47,.9)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:74px}
+  .brand{display:flex;align-items:center;gap:.7rem;font-family:'Bricolage Grotesque';font-weight:800;font-size:1.18rem;letter-spacing:-.01em}
+  .brand .mark{width:38px;height:38px;flex:none}
+  .brand small{display:block;font-family:'Inter';font-weight:600;font-size:.56rem;letter-spacing:.34em;color:var(--water-bright);margin-top:1px}
+  .nav-links{display:flex;gap:2rem;align-items:center}
+  .nav-links a{font-size:.94rem;font-weight:500;color:var(--ink-soft);position:relative;padding:4px 0}
+  .nav-links a::after{content:"";position:absolute;left:0;bottom:-2px;width:0;height:2px;background:var(--amber);transition:width .22s ease}
+  .nav-links a:hover{color:var(--ink)}
+  .nav-links a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:1rem}
+  .menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;padding:.5rem;cursor:pointer}
+  .menu-btn svg{width:22px;height:22px;color:var(--ink)}
+
+  .hero{padding:clamp(2.5rem,6vw,5rem) 0 clamp(3rem,6vw,5.5rem)}
+  .hero-grid{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(2rem,4vw,4rem);align-items:center}
+  .hero h1{font-size:clamp(3rem,7.2vw,5.6rem);font-weight:800;margin:1.3rem 0 1.3rem}
+  .hero h1 .accent{color:var(--amber);font-style:normal}
+  .hero h1 .line2{display:block;color:var(--water)}
+  .hero p.lead{font-size:clamp(1.05rem,1.5vw,1.22rem);color:var(--ink-soft);max-width:30rem;margin-bottom:2rem}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:.9rem;margin-bottom:1.9rem}
+  .hero-meta{display:flex;gap:1.6rem;flex-wrap:wrap;font-size:.9rem;color:var(--ink-soft)}
+  .hero-meta b{display:block;font-family:'Bricolage Grotesque';font-weight:700;font-size:1.5rem;color:var(--ink);line-height:1}
+  .hero-meta span{color:var(--water-bright);font-weight:600}
+
+  .scene{
+    position:relative;border-radius:26px;overflow:hidden;box-shadow:var(--shadow);
+    aspect-ratio:4/4.6;
+    background:url('./img/img1.webp') center/cover no-repeat,linear-gradient(#0d544e,#08312f);
+  }
+  .scene::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,49,47,.08),rgba(8,49,47,.35));z-index:1}
+  .scene svg{position:absolute;inset:0;width:100%;height:100%}
+  .scene .tag{
+    position:absolute;left:16px;bottom:16px;z-index:3;
+    background:rgba(8,49,47,.55);backdrop-filter:blur(6px);color:#fff;
+    font-size:.72rem;font-weight:600;letter-spacing:.06em;padding:.5rem .85rem;border-radius:100px;
+    display:flex;align-items:center;gap:.45rem;
+  }
+  .scene .tag svg{position:static;width:15px;height:15px}
+  .scene .pin{
+    position:absolute;right:16px;top:16px;z-index:3;background:rgba(255,255,255,.92);
+    color:var(--ink);font-size:.72rem;font-weight:700;padding:.45rem .8rem;border-radius:100px;
+    display:flex;align-items:center;gap:.4rem;box-shadow:var(--shadow-sm);
+  }
+  .pin svg{position:static;width:14px;height:14px;color:var(--amber)}
+
+  .strip{background:var(--water-deep);color:#eafaf6}
+  .strip .wrap{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem;padding:2.6rem 0}
+  .feat{display:flex;gap:.9rem;align-items:flex-start}
+  .feat .ic{width:42px;height:42px;flex:none;border-radius:12px;background:rgba(155,190,51,.16);display:grid;place-items:center;color:var(--lime)}
+  .feat .ic svg{width:22px;height:22px}
+  .feat h4{font-family:'Bricolage Grotesque';font-weight:700;font-size:1.02rem;margin-bottom:.2rem}
+  .feat p{font-size:.86rem;color:rgba(234,250,246,.72);line-height:1.45}
+
+  section.block{padding:clamp(3.5rem,7vw,6rem) 0}
+  .head{max-width:40rem;margin-bottom:2.8rem}
+  .head h2{font-size:clamp(2.1rem,4.4vw,3.2rem);font-weight:800;margin:1rem 0 .8rem}
+  .head p{color:var(--ink-soft);font-size:1.06rem}
+
+  .services{display:grid;grid-template-columns:repeat(3,1fr);gap:1.4rem}
+  .svc{
+    background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;
+    display:flex;flex-direction:column;transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .svc:hover{transform:translateY(-6px);box-shadow:var(--shadow)}
+  .svc .media{
+    aspect-ratio:16/10;position:relative;display:grid;place-items:center;
+    background-size:cover;background-position:center;overflow:hidden;
+  }
+  .svc .media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(8,49,47,.35))}
+  .m1{background-image:url('./img/img2.webp');background-color:#0f5a53}
+  .m2{background-image:url('./img/img3.webp');background-color:#0d544e}
+  .m5{background-image:url('./img/img4.webp');background-color:#c26016}
+  .m4{background-image:url('./img/img5.webp');background-color:#0b4d6b}
+  .m3{background-image:url('./img/img6.webp');background-color:#7a8a1f}
+  .m6{background-image:url('./img/img7.webp');background-color:#14405e}
+  .svc .body{padding:1.4rem 1.4rem 1.5rem;display:flex;flex-direction:column;flex:1}
+  .svc h3{font-size:1.3rem;font-weight:700;margin-bottom:.5rem}
+  .svc p{font-size:.92rem;color:var(--ink-soft);margin-bottom:1rem;flex:1}
+  .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.1rem}
+  .chip{font-size:.72rem;font-weight:600;color:var(--water);background:rgba(18,133,122,.1);padding:.32rem .6rem;border-radius:8px}
+  .svc-link{display:inline-flex;align-items:center;gap:.4rem;font-weight:600;font-size:.9rem;color:var(--amber-deep)}
+  .svc-link svg{width:16px;height:16px;transition:transform .18s ease}
+  .svc-link:hover svg{transform:translateX(4px)}
+
+  .destinos{background:var(--water-deep);color:#eafaf6}
+  .dest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;margin-top:2.4rem}
+  .dest{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;display:flex;align-items:flex-end;padding:1.3rem;background-size:cover;background-position:center}
+  .d1{background-image:url('./img/img8.webp');background-color:#0d544e}
+  .d2{background-image:url('./img/img9.webp');background-color:#0b3d5c}
+  .d3{background-image:url('./img/img10.webp');background-color:#5a3c8a}
+  .dest::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,49,47,.7))}
+  .dest .txt{position:relative;z-index:2}
+  .dest h3{font-size:1.35rem;font-weight:700;margin-bottom:.2rem}
+  .dest p{font-size:.85rem;color:rgba(234,250,246,.78)}
+  .destinos .head h2,.destinos .head p{color:#eafaf6}
+  .destinos .eyebrow{color:var(--lime)}
+
+  .about{display:grid;grid-template-columns:1.05fr .95fr;gap:clamp(2rem,4vw,4rem);align-items:center}
+  .about-scene{border-radius:22px;overflow:hidden;box-shadow:var(--shadow);aspect-ratio:5/4;position:relative;background-size:cover;background-position:center;background-repeat:no-repeat}
+  .m17{background-image:url('./img/img17.webp');background-color:#0d544e}
+  .about-scene svg{width:100%;height:100%;display:block}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;margin-top:2rem}
+  .stat{border:1px solid var(--line);border-radius:16px;padding:1.2rem 1.3rem;background:#fff}
+  .stat b{font-family:'Bricolage Grotesque';font-weight:800;font-size:2rem;color:var(--water);display:block;line-height:1}
+  .stat span{font-size:.84rem;color:var(--ink-soft)}
+
+  .gallery{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:150px;gap:.9rem;margin-top:2.4rem}
+  .g{border-radius:14px;overflow:hidden;position:relative;background-size:cover;background-position:center;display:grid;place-items:center;color:rgba(255,255,255,.9)}
+  .g svg{width:34px;height:34px}
+  .g.tall{grid-row:span 2}
+  .g.wide{grid-column:span 2}
+  .ga{background-image:url('./img/img11.webp');background-color:#0d544e}
+  .gb{background-image:url('./img/img12.webp');background-color:#0b4d6b}
+  .gc{background-image:url('./img/img13.webp');background-color:#c26016}
+  .gd{background-image:url('./img/img14.webp');background-color:#7a8a1f}
+  .ge{background-image:url('./img/img15.webp');background-color:#14405e}
+  .gf{background-image:url('./img/img16.webp');background-color:#0f5a53}
+
+  .cta-band{background:linear-gradient(135deg,var(--amber),var(--amber-deep));color:#fff;border-radius:28px;padding:clamp(2.5rem,5vw,4rem);text-align:center;position:relative;overflow:hidden}
+  .cta-band::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(255,255,255,.16),transparent 55%)}
+  .cta-band>*{position:relative;z-index:2}
+  .cta-band h2{font-size:clamp(2rem,4.4vw,3.2rem);font-weight:800;margin-bottom:.8rem}
+  .cta-band p{font-size:1.1rem;max-width:34rem;margin:0 auto 2rem;opacity:.94}
+  .cta-band .btn-wa{background:#fff;color:var(--amber-deep)}
+  .cta-band .num{margin-top:1.3rem;font-weight:700;font-family:'Bricolage Grotesque';font-size:1.3rem;display:inline-flex;align-items:center;gap:.5rem}
+
+  footer{background:var(--ink);color:rgba(255,255,255,.72);padding:3.5rem 0 2rem;margin-top:clamp(3.5rem,7vw,6rem)}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:2.5rem;padding-bottom:2.5rem;border-bottom:1px solid rgba(255,255,255,.1)}
+  .foot-brand .brand{color:#fff;margin-bottom:1rem}
+  .foot-brand p{font-size:.9rem;max-width:22rem}
+  footer h5{font-family:'Bricolage Grotesque';font-weight:700;color:#fff;font-size:1rem;margin-bottom:1rem}
+  footer li{list-style:none;margin-bottom:.6rem;font-size:.9rem}
+  footer a:hover{color:#fff}
+  .socials{display:flex;gap:.7rem;margin-top:.4rem}
+  .socials a{width:38px;height:38px;border-radius:10px;border:1px solid rgba(255,255,255,.16);display:grid;place-items:center;transition:background .18s,border-color .18s}
+  .socials a:hover{background:var(--amber);border-color:var(--amber)}
+  .socials svg{width:18px;height:18px;color:#fff}
+  .foot-bottom{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;padding-top:1.6rem;font-size:.8rem;color:rgba(255,255,255,.5)}
+
+  .float-wa{position:fixed;right:20px;bottom:20px;z-index:60;width:60px;height:60px;border-radius:50%;background:var(--wa);display:grid;place-items:center;box-shadow:0 14px 32px -8px rgba(37,211,102,.75);transition:transform .2s ease}
+  .float-wa:hover{transform:scale(1.08)}
+  .float-wa svg{width:32px;height:32px;color:#fff}
+  .float-wa::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--wa);animation:pulse 2.4s infinite}
+  @keyframes pulse{0%{transform:scale(1);opacity:.7}70%{transform:scale(1.5);opacity:0}100%{opacity:0}}
+
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease, transform .7s ease}
+  .reveal.in{opacity:1;transform:none}
+
+  @media (max-width:1040px){
+    .services{grid-template-columns:repeat(2,1fr)}
+  }
+  @media (max-width:940px){
+    .hero-grid,.about{grid-template-columns:1fr}
+    .scene{max-width:640px;width:100%;margin:0 auto;order:-1;aspect-ratio:16/10}
+    .strip .wrap{grid-template-columns:repeat(2,1fr);gap:1.6rem 1.2rem}
+    .dest-grid{grid-template-columns:repeat(3,1fr)}
+    .gallery{grid-template-columns:repeat(2,1fr);grid-auto-rows:160px}
+    .g.tall{grid-row:span 1}
+    .foot-grid{grid-template-columns:1fr 1fr}
+    .about-scene{max-width:560px;margin:0 auto}
+  }
+  @media (max-width:680px){
+    .nav-links{position:fixed;inset:74px 0 auto;flex-direction:column;background:var(--sand);padding:1.4rem 6vw;gap:1.1rem;border-bottom:1px solid var(--line);box-shadow:var(--shadow-sm);transform:translateY(-120%);transition:transform .28s ease;z-index:40}
+    .nav-links.open{transform:none}
+    .nav-links a{font-size:1.05rem}
+    .menu-btn{display:block}
+    .nav-cta .btn-ghost{display:none}
+    .services,.dest-grid,.gallery,.stats,.foot-grid{grid-template-columns:1fr}
+    .gallery{grid-auto-rows:200px}
+    .g.wide,.g.tall{grid-column:auto;grid-row:auto}
+    .strip .wrap{grid-template-columns:1fr;padding:2rem 0}
+    .hero-meta{gap:1.4rem}
+    .scene{aspect-ratio:4/3}
+    .hero-actions .btn{flex:1;justify-content:center}
+    .foot-bottom{flex-direction:column;gap:.4rem}
+  }
+  @media (max-width:430px){
+    .wrap{width:90vw}
+    .hero h1{font-size:2.65rem}
+    .hero .lead{font-size:1rem}
+    .cta-band{padding:2.1rem 1.3rem}
+    .cta-band .num{font-size:1.1rem}
+    .stat b{font-size:1.7rem}
+    .float-wa{width:54px;height:54px;right:16px;bottom:16px}
+    .float-wa svg{width:28px;height:28px}
+    .hero-meta b{font-size:1.3rem}
+    .brand small{display:none}
+  }
+  /* Ajustes responsive para móviles estrechos */
+  @media (max-width:680px){
+    .nav{gap:.55rem}
+    .brand{min-width:0;flex:0 1 auto;font-size:1rem;line-height:1.05}
+    .brand span{min-width:0;white-space:nowrap}
+    .brand .mark{width:34px;height:34px}
+    .nav-cta{margin-left:auto;gap:.5rem;flex:none}
+    .nav-cta .btn-wa{padding:.72rem 1rem;white-space:nowrap}
+    .menu-btn{flex:none}
+  }
+
+  @media (max-width:480px){
+    .wrap{width:min(100% - 32px,1180px)}
+    .nav{height:68px}
+    .nav-links{inset:68px 0 auto}
+    .brand{font-size:.95rem;gap:.5rem}
+    .brand .mark{width:32px;height:32px}
+    .nav-cta .btn-wa{width:42px;height:42px;padding:0;justify-content:center;gap:0;font-size:0;border-radius:50%}
+    .nav-cta .btn-wa svg{width:21px;height:21px}
+    .menu-btn{width:42px;height:42px;padding:0;display:grid;place-items:center}
+    .hero{padding-top:2rem}
+    .hero-actions{flex-direction:column}
+    .hero-actions .btn{width:100%;flex:none}
+    .scene .pin,.scene .tag{font-size:.65rem;padding:.4rem .65rem}
+    .scene .pin{right:10px;top:10px}
+    .scene .tag{left:10px;bottom:10px;max-width:calc(100% - 20px)}
+  }
+
+  @media (max-width:360px){
+    .wrap{width:min(100% - 24px,1180px)}
+    .nav{gap:.35rem}
+    .brand{font-size:.84rem;gap:.4rem}
+    .brand .mark{width:30px;height:30px}
+    .nav-cta{gap:.35rem}
+    .nav-cta .btn-wa,.menu-btn{width:38px;height:38px}
+    .hero h1{font-size:2.3rem}
+    .eyebrow{font-size:.65rem;letter-spacing:.16em}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{scroll-behavior:auto!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    .float-wa::after{animation:none}
+  }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <div class="wrap nav">
+    <a href="#top" class="brand" aria-label="Aventura 360 inicio">
+      <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true">
+        <circle cx="20" cy="20" r="19" fill="#08312F"/>
+        <path d="M20 7l7 20-7-4-7 4 7-20z" fill="#fff"/>
+        <path d="M20 7l7 20-7-4V7z" fill="#EC7A22"/>
+        <circle cx="20" cy="4.5" r="2.4" fill="#9BBE33"/>
+      </svg>
+      <span>AVENTURA 360<small>VIVE MÁS · EXPLORA TODO</small></span>
+    </a>
+    <nav class="nav-links" id="navlinks">
+      <a href="#servicios">Servicios</a>
+      <a href="#destinos">Destinos</a>
+      <a href="#nosotros">Nosotros</a>
+      <a href="#galeria">Galería</a>
+    </nav>
+    <div class="nav-cta">
+      <a href="#servicios" class="btn btn-ghost">Ver planes</a>
+      <a href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20reservar%20una%20experiencia%20en%20Guatap%C3%A9" target="_blank" rel="noopener" class="btn btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.7 2.6 4 3.6 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <button class="menu-btn" id="menuBtn" aria-label="Abrir menú">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy reveal">
+      <span class="eyebrow">Guatapé · Antioquia · Colombia</span>
+      <h1>Vive Guatapé <span class="line2">al <span class="accent">máximo</span></span></h1>
+      <p class="lead">Helicóptero, lancha, jetsky y más sobre el embalse. Armamos tu día completo de aventura y lo reservás por WhatsApp en minutos.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20reservar%20una%20experiencia%20en%20Guatap%C3%A9" target="_blank" rel="noopener" class="btn btn-wa">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.7 2.6 4 3.6 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
+          Reservar por WhatsApp
+        </a>
+        <a href="#servicios" class="btn btn-ghost">Ver experiencias</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>+20</b><span>experiencias</span></div>
+        <div><b>+5.000</b><span>viajeros</span></div>
+        <div><b>Todos</b><span>los días</span></div>
+      </div>
+    </div>
+
+    <div class="scene reveal" role="img" aria-label="Aventura en el embalse de Guatapé">
+      <span class="pin"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7zm0 9.5A2.5 2.5 0 1112 6.5a2.5 2.5 0 010 5z"/></svg>Guatapé, Colombia</span>
+      <span class="tag"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2l2.9 6.3L22 9.2l-5 4.9 1.2 6.9L12 17.8 5.8 21l1.2-6.9-5-4.9 7.1-.9L12 2z"/></svg>Vive más · Explora todo</span>
+    </div>
+  </div>
+</section>
+
+<div class="strip">
+  <div class="wrap">
+    <div class="feat reveal">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div><h4>Operadores certificados</h4><p>Equipos revisados y personal con experiencia real en el agua.</p></div>
+    </div>
+    <div class="feat reveal">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.4"/><path d="M3 20c0-3 3-5 6-5s6 2 6 5M15 20c0-2 2-3.5 4-3.5"/></svg></div>
+      <div><h4>Para toda la familia</h4><p>Planes para parejas, amigos y grupos grandes, a todos los niveles.</p></div>
+    </div>
+    <div class="feat reveal">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a4 4 0 01-4 4H8l-4 3V7a4 4 0 014-4h9a4 4 0 014 4z"/></svg></div>
+      <div><h4>Reserva sin vueltas</h4><p>Escribís por WhatsApp y aseguramos tu cupo en el mismo día.</p></div>
+    </div>
+    <div class="feat reveal">
+      <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a7 7 0 00-7 7c0 5 7 13 7 13s7-8 7-13a7 7 0 00-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg></div>
+      <div><h4>Guías locales</h4><p>Gente de Guatapé que conoce cada rincón del embalse.</p></div>
+    </div>
+  </div>
+</div>
+
+<section class="block" id="servicios">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Nuestros servicios</span>
+      <h2>Elegí tu aventura</h2>
+      <p>Cada experiencia la coordinamos de principio a fin. Vos elegís qué querés hacer y nosotros armamos el día.</p>
+    </div>
+    <div class="services">
+
+      <article class="svc reveal">
+        <div class="media m1"></div>
+        <div class="body">
+          <h3>Paseos en lancha</h3>
+          <p>Recorré los brazos del embalse hasta el Peñón, con las mejores vistas del agua.</p>
+          <div class="chips"><span class="chip">Hasta 6 personas</span><span class="chip">Salidas diarias</span></div>
+          <a class="svc-link" href="https://wa.me/573233896843?text=Hola%2C%20quiero%20info%20de%20los%20paseos%20en%20lancha" target="_blank" rel="noopener">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="media m2"></div>
+        <div class="body">
+          <h3>Jetsky</h3>
+          <p>Velocidad y adrenalina sobre el agua. Chaleco y equipo incluidos, con instructor si es tu primera vez.</p>
+          <div class="chips"><span class="chip">Equipo incluido</span><span class="chip">Con instructor</span></div>
+          <a class="svc-link" href="https://wa.me/573233896843?text=Hola%2C%20quiero%20info%20del%20jetsky" target="_blank" rel="noopener">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="media m5"></div>
+        <div class="body">
+          <h3>Vuelos en helicóptero</h3>
+          <p>Sobrevolá La Piedra del Peñol y el embalse desde el aire. Bell 206, piloto certificado y vistas 360.</p>
+          <div class="chips"><span class="chip">Bell 206</span><span class="chip">Piloto certificado</span></div>
+          <a class="svc-link" href="https://wa.me/573233896843?text=Hola%2C%20quiero%20info%20del%20vuelo%20en%20helic%C3%B3ptero" target="_blank" rel="noopener">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="media m4"></div>
+        <div class="body">
+          <h3>Wakeboard</h3>
+          <p>Diversión sobre la estela para principiantes y avanzados. Tabla, chaleco y jalón incluidos.</p>
+          <div class="chips"><span class="chip">Todos los niveles</span><span class="chip">Equipo incluido</span></div>
+          <a class="svc-link" href="https://wa.me/573233896843?text=Hola%2C%20quiero%20info%20del%20wakeboard" target="_blank" rel="noopener">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="media m3"></div>
+        <div class="body">
+          <h3>Cuatrimotos</h3>
+          <p>Rutas por las montañas de Guatapé con guía al frente. Aventura extrema para todos los niveles.</p>
+          <div class="chips"><span class="chip">Rutas guiadas</span><span class="chip">Vistas extremas</span></div>
+          <a class="svc-link" href="https://wa.me/573233896843?text=Hola%2C%20quiero%20info%20de%20las%20cuatrimotos" target="_blank" rel="noopener">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="media m6"></div>
+        <div class="body">
+          <h3>Parapente</h3>
+          <p>Volá en parapente biplaza con vista al embalse. No necesitás experiencia previa, vas con piloto.</p>
+          <div class="chips"><span class="chip">Vuelo biplaza</span><span class="chip">Sin experiencia</span></div>
+          <a class="svc-link" href="https://wa.me/573233896843?text=Hola%2C%20quiero%20info%20del%20parapente" target="_blank" rel="noopener">Reservar<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<div class="destinos block" id="destinos">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Dónde vivís la aventura</span>
+      <h2>Guatapé de punta a punta</h2>
+      <p>El embalse, La Piedra y el pueblo más colorido de Antioquia, en un solo día.</p>
+    </div>
+    <div class="dest-grid">
+      <div class="dest d1 reveal"><div class="txt"><h3>La Piedra del Peñol</h3><p>740 escalones y la vista más famosa de Colombia.</p></div></div>
+      <div class="dest d2 reveal"><div class="txt"><h3>Embalse de Guatapé</h3><p>Kilómetros de agua verde para navegar y explorar.</p></div></div>
+      <div class="dest d3 reveal"><div class="txt"><h3>Pueblo de Guatapé</h3><p>Zócalos, malecón y color por cada calle.</p></div></div>
+    </div>
+  </div>
+</div>
+
+<section class="block" id="nosotros">
+  <div class="wrap about">
+    <div class="reveal">
+      <span class="eyebrow">Aventura 360</span>
+      <h2 style="font-size:clamp(2.1rem,4.4vw,3.2rem);font-weight:800;margin:1rem 0 1rem">Tu aventura empieza aquí</h2>
+      <p style="color:var(--ink-soft);font-size:1.06rem">Nacimos en Guatapé para que vivas el destino completo: adrenalina, naturaleza y descanso en un solo lugar. Coordinamos cada experiencia para que lo único que hagas sea disfrutar.</p>
+      <div class="stats">
+        <div class="stat"><b>+5.000</b><span>viajeros que ya vivieron Guatapé con nosotros</span></div>
+        <div class="stat"><b>+20</b><span>experiencias únicas en agua, aire y tierra</span></div>
+        <div class="stat"><b>100%</b><span>enfoque en tu seguridad y la de tu grupo</span></div>
+        <div class="stat"><b>7/7</b><span>disponibles todos los días del año</span></div>
+      </div>
+    </div>
+  <div class="about-scene m17 reveal" role="img" aria-label="Vista aérea del embalse de Guatapé"></div>
+  </div>
+</section>
+
+<section class="block" id="galeria" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="eyebrow">Galería</span>
+      <h2>Un adelanto de la experiencia</h2>
+    </div>
+    <div class="gallery">
+      <div class="g ga wide tall reveal"></div>
+      <div class="g gb reveal"></div>
+      <div class="g gc reveal"></div>
+      <div class="g gd reveal"></div>
+      <div class="g ge wide reveal"></div>
+      <div class="g gf reveal"></div>
+    </div>
+  </div>
+</section>
+
+<section class="block" id="contacto" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <span class="eyebrow" style="color:#fff">Tu aventura te espera</span>
+      <h2>Contanos qué querés hacer</h2>
+      <p>Escribinos por WhatsApp, armamos el plan a tu medida y aseguramos tu cupo en Guatapé.</p>
+      <a href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20armar%20mi%20plan%20en%20Guatap%C3%A9" target="_blank" rel="noopener" class="btn btn-wa">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.7 2.6 4 3.6 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
+        Escribir por WhatsApp
+      </a>
+      <div class="num"><svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8c1.4 2.8 3.8 5.1 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C10.6 21 3 13.4 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.2.2 2.4.6 3.6.1.4 0 .8-.2 1l-2.3 2.2z"/></svg>323 389 6843</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <div class="brand">
+          <svg class="mark" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="19" fill="#0D544E"/><path d="M20 7l7 20-7-4-7 4 7-20z" fill="#fff"/><path d="M20 7l7 20-7-4V7z" fill="#EC7A22"/></svg>
+          <span>AVENTURA 360</span>
+        </div>
+        <p>El destino, la aventura y la experiencia te esperan en Guatapé, Antioquia. Vive más, explora todo.</p>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 8h2V5h-2c-2 0-3 1.3-3 3.2V10H9v3h2v6h3v-6h2l.5-3H14V8.6c0-.4.2-.6.6-.6z"/></svg></a>
+          <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 3c.3 1.9 1.5 3.3 3.4 3.5v2.6c-1.2 0-2.4-.4-3.4-1v5.8c0 3-2.2 5.1-5 5.1S6 21.9 6 19s2.2-5 5.1-5c.3 0 .6 0 .9.1v2.7a2.3 2.3 0 00-1-.2 2.3 2.3 0 100 4.6c1.3 0 2.3-1 2.3-2.4V3H16z"/></svg></a>
+        </div>
+      </div>
+      <div>
+        <h5>Servicios</h5>
+        <ul>
+          <li><a href="#servicios">Vuelos en helicóptero</a></li>
+          <li><a href="#servicios">Paseos en lancha</a></li>
+          <li><a href="#servicios">Jetsky y wakeboard</a></li>
+          <li><a href="#servicios">Cuatrimotos y parapente</a></li>
+          <li><a href="#servicios">Hotelería</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contacto</h5>
+        <ul>
+          <li>Guatapé, Antioquia · Colombia</li>
+          <li><a href="https://wa.me/573233896843" target="_blank" rel="noopener">WhatsApp · 323 389 6843</a></li>
+          <li><a href="#servicios">Reservas todos los días</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Aventura 360. Todos los derechos reservados.</span>
+      <span>Política de privacidad · Términos y condiciones</span>
+    </div>
+  </div>
+</footer>
+
+<a href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20reservar" target="_blank" rel="noopener" class="float-wa" aria-label="Reservar por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15l-1.3 4.8 4.9-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.7 2.6 4 3.6 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3z"/></svg>
+</a>
+
+<script>
+  const header=document.querySelector('header');
+  window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>10));
+
+  const menuBtn=document.getElementById('menuBtn');
+  const navlinks=document.getElementById('navlinks');
+  menuBtn.addEventListener('click',()=>navlinks.classList.toggle('open'));
+  navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>navlinks.classList.remove('open')));
+
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});
+  },{threshold:.12});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{el.style.transitionDelay=(i%3)*70+'ms';io.observe(el);});
+</script>
+</body>
+</html>
