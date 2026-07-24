@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<!-- AVENTURA 360 · ACTUALIZACIÓN 20% + CRISTO + NOSOTROS · 2026-07-24 -->
 <html lang="es">
 <head>
   <meta charset="UTF-8">
@@ -38,7 +39,7 @@
     }
 
     *{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth;scroll-padding-top:88px}
+    html{scroll-behavior:smooth;scroll-padding-top:126px}
     body{
       font-family:var(--body);
       color:var(--ink);
@@ -80,8 +81,17 @@
     .btn-glass{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.3);backdrop-filter:blur(8px)}
     .btn-glass:hover{background:#fff;color:var(--deep)}
 
+    .top-promo{
+      position:fixed;left:0;right:0;top:0;z-index:95;height:38px;display:flex;align-items:center;
+      justify-content:center;gap:.65rem;padding:0 20px;background:var(--deep);color:#fff;
+      font-size:.78rem;font-weight:700;letter-spacing:.02em;text-align:center;
+    }
+    .top-promo strong{color:var(--lime);font-family:var(--display);font-size:.9rem}
+    .top-promo span{color:rgba(255,255,255,.72)}
+    .top-promo:hover strong{color:#fff}
+
     .site-header{
-      position:fixed;left:0;right:0;top:0;z-index:80;transition:.3s ease;
+      position:fixed;left:0;right:0;top:38px;z-index:80;transition:.3s ease;
       border-bottom:1px solid transparent;
     }
     .site-header.scrolled{
@@ -114,7 +124,7 @@
     .menu-btn svg{width:21px}
 
     .hero{
-      min-height:100svh;padding:120px 0 65px;display:grid;align-items:center;position:relative;
+      min-height:100svh;padding:158px 0 65px;display:grid;align-items:center;position:relative;
       overflow:hidden;background:
         radial-gradient(circle at 6% 16%,rgba(180,214,74,.18),transparent 26%),
         radial-gradient(circle at 90% 88%,rgba(25,160,146,.16),transparent 28%),
@@ -291,6 +301,27 @@
     .story-copy>p{color:var(--muted);font-size:1.02rem;max-width:560px}
     .story-tags{display:flex;flex-wrap:wrap;gap:.55rem;margin:1.4rem 0}
     .story-tag{border:1px solid currentColor;border-radius:999px;padding:.55rem .75rem;font-size:.72rem;font-weight:700;opacity:.75}
+    .flight-overview{
+      margin:1.15rem 0 1.4rem;padding:1.15rem;border:1px solid rgba(255,255,255,.16);
+      border-radius:22px;background:rgba(255,255,255,.07);
+    }
+    .flight-overview>strong{
+      display:block;color:var(--lime);font-family:var(--display);font-size:1rem;margin-bottom:.8rem;
+    }
+    .flight-route-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.55rem}
+    .flight-route{
+      min-height:72px;padding:.75rem;border-radius:14px;background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.1);
+    }
+    .flight-route:last-child{grid-column:1/-1}
+    .flight-route b{display:block;font-family:var(--display);font-size:.83rem;line-height:1.15}
+    .flight-route small{display:block;color:rgba(255,255,255,.62);font-size:.67rem;line-height:1.35;margin-top:.25rem}
+    .flight-assurances{
+      display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.45rem;margin-top:.75rem;
+      color:rgba(255,255,255,.76);font-size:.68rem;font-weight:700;
+    }
+    .flight-assurances span{display:flex;align-items:center;gap:.4rem}
+    .flight-assurances span::before{content:"";width:7px;height:7px;flex:none;border-radius:50%;background:var(--orange)}
     .story-actions{display:flex;flex-wrap:wrap;gap:.75rem;margin:1.5rem 0 1.2rem}
     .story-video-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem;margin-top:1.4rem}
     .story-video{position:relative;border-radius:18px;overflow:hidden;background:#071f1e;aspect-ratio:9/12;max-height:315px}
@@ -382,6 +413,7 @@
     .about-badge span{font-size:.64rem;font-family:var(--body);text-transform:uppercase;letter-spacing:.14em;display:block}
     .about-copy h2{font-size:clamp(2.7rem,5vw,5rem);margin:.9rem 0 1.25rem}
     .about-copy>p{color:var(--muted);font-size:1.04rem}
+    .about-copy>p+p{margin-top:1rem}
     .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin-top:2rem}
     .stat{border-top:1px solid var(--line);padding:1.3rem .2rem}
     .stat strong{font-family:var(--display);font-size:clamp(2.2rem,4vw,3.7rem);line-height:1;color:var(--water)}
@@ -484,7 +516,7 @@
     @media(max-width:1060px){
       .nav-links{gap:1.2rem}
       .hero-grid{grid-template-columns:1fr;gap:1rem}
-      .hero{padding-top:125px}
+      .hero{padding-top:163px}
       .hero-copy{max-width:760px}
       .hero-visual{min-height:650px;width:min(760px,100%);margin-inline:auto}
       .service-card{grid-column:span 6}
@@ -505,7 +537,7 @@
       .site-header{background:rgba(246,240,228,.88);backdrop-filter:blur(14px)}
       .nav{height:72px}
       .nav-links{
-        position:fixed;inset:72px 0 auto;background:var(--sand);padding:1.4rem 24px 2rem;
+        position:fixed;inset:110px 0 auto;background:var(--sand);padding:1.4rem 24px 2rem;
         flex-direction:column;align-items:stretch;gap:.2rem;border-bottom:1px solid var(--line);
         transform:translateY(-125%);opacity:0;transition:.3s ease;box-shadow:var(--shadow-soft);
       }
@@ -536,7 +568,9 @@
 
     @media(max-width:620px){
       .section{padding:4.7rem 0}
-      .hero{padding:105px 0 62px;min-height:auto}
+      .hero{padding:143px 0 62px;min-height:auto}
+      .top-promo{font-size:.7rem;padding-inline:12px}
+      .top-promo span{display:none}
       .brand-mark{width:40px;height:40px;border-radius:13px}
       .brand-mark::before{background-size:70px 70px;background-position:-15px -4px}
       .brand-name{font-size:.9rem}
@@ -564,6 +598,8 @@
       .story-media figure:first-of-type{height:320px}
       .story-media figure:not(:first-of-type){height:110px}
       .story-copy h3{font-size:3rem}
+      .flight-route-grid,.flight-assurances{grid-template-columns:1fr}
+      .flight-route:last-child{grid-column:auto}
       .story-video{max-height:290px}
       .reel-frame{height:100svh;min-height:620px;max-height:none}
       .reel-copy h2{font-size:3.45rem}
@@ -612,6 +648,11 @@
   </style>
 </head>
 <body>
+  <a class="top-promo" href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20reservar%20mi%20aventura%20con%20el%2020%25" target="_blank" rel="noopener">
+    <strong>Reserva tu aventura con el 20%</strong>
+    <span>Asegura tu experiencia directamente por WhatsApp →</span>
+  </a>
+
   <header class="site-header" id="siteHeader">
     <div class="wrap nav">
       <a class="brand" href="#inicio" aria-label="Aventura 360, inicio">
@@ -728,7 +769,7 @@
             <span class="service-number">01</span><span class="service-category">Aire</span>
             <div class="service-content">
               <h3>Vuelo en helicóptero</h3>
-              <p>La Piedra, el embalse y las montañas reunidos en una vista que cambia por completo la escala de Guatapé.</p>
+              <p>Sobrevuela la Piedra, el embalse y el proyecto del Cristo más grande del mundo desde una perspectiva única.</p>
               <button class="service-open" type="button" data-service="helicoptero">Descubrir experiencia <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
@@ -866,11 +907,27 @@
           <div class="story-copy">
             <span class="kicker light">La escala cambia desde arriba</span>
             <h3>Guatapé desde el cielo.</h3>
-            <p>El vuelo une en una sola mirada la Piedra, el embalse y el relieve de la región. Las fotografías muestran la experiencia desde la cabina y la amplitud del paisaje exterior.</p>
+            <p>Sobrevuela el proyecto del Cristo más grande del mundo y descubre desde el aire los destinos más representativos de Guatapé y El Peñol.</p>
             <div class="story-tags">
               <span class="story-tag">Vista panorámica</span>
               <span class="story-tag">La Piedra</span>
               <span class="story-tag">Embalse e islas</span>
+            </div>
+            <div class="flight-overview" aria-label="Lugares incluidos en el sobrevuelo">
+              <strong>Lo que podrás contemplar durante el vuelo</strong>
+              <div class="flight-route-grid">
+                <div class="flight-route"><b>Proyecto del Cristo</b><small>Sobrevuela el proyecto del Cristo más grande del mundo.</small></div>
+                <div class="flight-route"><b>La Piedra del Peñol</b><small>Una panorámica privilegiada del principal símbolo de la región.</small></div>
+                <div class="flight-route"><b>Zona de embalses</b><small>Agua, islas y montañas reunidas en una sola vista.</small></div>
+                <div class="flight-route"><b>Fincas reconocidas</b><small>Propiedades y paisajes destacados de los alrededores.</small></div>
+                <div class="flight-route"><b>Réplica del Viejo Peñol</b><small>Un punto representativo de la memoria y la historia local.</small></div>
+              </div>
+              <div class="flight-assurances">
+                <span>Seguridad como prioridad</span>
+                <span>Atención personalizada</span>
+                <span>Vistas inigualables</span>
+                <span>Experiencia memorable</span>
+              </div>
             </div>
             <div class="story-actions">
               <a class="btn btn-primary" href="#galeria">Ver fotografías</a>
@@ -1038,7 +1095,9 @@
         <div class="about-copy reveal">
           <span class="kicker">Nuestra esencia</span>
           <h2>Un destino. Muchas formas de vivirlo.</h2>
-          <p>Aventura 360 conecta el color del pueblo, la presencia de La Piedra, los recorridos por tierra y las vistas desde el cielo en una experiencia completa de Guatapé.</p>
+          <p>En Aventura 360 nos apasiona crear experiencias inolvidables en uno de los destinos turísticos más hermosos de Colombia: Guatapé. Nuestro objetivo es ofrecer a cada visitante momentos únicos, combinando aventura, naturaleza, seguridad y un servicio de alta calidad.</p>
+          <p>Contamos con una amplia variedad de actividades para que disfrutes al máximo tu visita, como paseos en lancha, motos acuáticas (Jet Ski), vuelos panorámicos en helicóptero, recorridos en cuatrimoto y opciones de hospedaje cuidadosamente seleccionadas para garantizar una experiencia completa.</p>
+          <p>Trabajamos con operadores y aliados confiables, brindando atención personalizada y acompañamiento durante todo el proceso de reserva. Ya sea que viajes en pareja, con amigos, en familia o en grupo, estamos comprometidos en hacer de tu visita a Guatapé un recuerdo inolvidable.</p>
           <div class="stats">
             <div class="stat"><strong data-counter="5" data-suffix="">0</strong><span>perspectivas destacadas</span></div>
             <div class="stat"><strong data-counter="4" data-suffix="">0</strong><span>escenarios: pueblo, Piedra, tierra y aire</span></div>
@@ -1176,10 +1235,10 @@
       helicoptero: {
         category: "Experiencia de aire",
         title: "Vuelo en helicóptero",
-        description: "Desde el aire, el embalse, sus islas y la Piedra del Peñol se unen en una sola panorámica. El material muestra tanto la vista exterior como la experiencia dentro de la cabina.",
+        description: "Sobrevuela el proyecto del Cristo más grande del mundo y contempla desde el aire la Piedra del Peñol, la zona de embalses, fincas reconocidas y la réplica del Viejo Peñol.",
         images: ["./img/helicoptero-piedra.webp", "./img/helicoptero-vista.webp", "./img/helicoptero-cabina.webp", "./img/helicoptero-poster.webp"],
         alts: ["Helicóptero sobre La Piedra", "Vista del embalse desde la cabina", "Experiencia dentro del helicóptero", "Pieza visual del vuelo sobre El Peñol"],
-        features: ["Vista panorámica de La Piedra y el embalse", "Perspectiva desde el interior de la cabina", "Consulta y reserva directamente por WhatsApp"]
+        features: ["Proyecto del Cristo más grande del mundo", "Piedra, embalse, fincas y réplica del Viejo Peñol", "Atención personalizada y reserva por WhatsApp"]
       },
       cuatrimotos: {
         category: "Experiencia de tierra",
