@@ -554,10 +554,15 @@
     .dialog-main{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;object-position:center;transition:opacity .2s;background:var(--deep)}
     .dialog-media::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(6,45,43,.55),transparent 45%);pointer-events:none}
     .dialog-thumbs{position:absolute;left:20px;bottom:20px;right:20px;display:flex;gap:.6rem;z-index:2;overflow-x:auto;padding-bottom:3px;scrollbar-width:thin}
-    .dialog-thumb{width:82px;height:62px;border-radius:12px;overflow:hidden;border:2px solid transparent;background:#fff;cursor:pointer;padding:0}
+    .dialog-thumb{flex:0 0 82px;width:82px;height:62px;border-radius:12px;overflow:hidden;border:2px solid transparent;background:#fff;cursor:pointer;padding:0}
     .dialog-thumb.active{border-color:var(--orange)}
     .dialog-thumb img{height:100%;object-fit:cover}
     .dialog-close{position:absolute;right:18px;top:18px;z-index:5;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.9);color:var(--ink);font-size:1.45rem;cursor:pointer;box-shadow:var(--shadow-soft)}
+    .dialog-nav{position:absolute;top:50%;z-index:4;width:48px;height:48px;border:1px solid rgba(255,255,255,.55);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.92);color:var(--ink);font-size:2rem;line-height:1;cursor:pointer;box-shadow:0 12px 32px rgba(0,0,0,.25);transform:translateY(-50%);transition:transform .2s,background .2s}
+    .dialog-nav:hover{background:#fff;transform:translateY(-50%) scale(1.06)}
+    .dialog-prev{left:18px}
+    .dialog-next{right:18px}
+    .dialog-count{position:absolute;left:50%;bottom:96px;z-index:4;transform:translateX(-50%);padding:.42rem .72rem;border-radius:999px;background:rgba(6,45,43,.78);color:#fff;font-size:.78rem;font-weight:800;letter-spacing:.08em;box-shadow:0 8px 24px rgba(0,0,0,.22)}
     .dialog-body{padding:clamp(2rem,4vw,3.8rem);display:flex;flex-direction:column}
     .dialog-body .dialog-cat{text-transform:uppercase;letter-spacing:.17em;color:var(--aqua);font-size:.69rem;font-weight:700}
     .dialog-body h3{font-size:clamp(2.5rem,5vw,4.2rem);margin:.8rem 0 1rem}
@@ -715,6 +720,8 @@
       .lightbox-prev{left:18px}.lightbox-next{right:18px}
       .lightbox-count{bottom:38px}
       .dialog-thumbs{overflow-x:auto}
+      .dialog-nav{width:44px;height:44px;font-size:1.8rem}
+      .dialog-prev{left:12px}.dialog-next{right:12px}
     }
 
     @media(max-width:380px){
@@ -800,7 +807,7 @@
 
         <div class="hero-visual reveal" id="heroVisual">
           <figure class="hero-main">
-            <img src="img/piedra-base.webp" alt="Vista de la Piedra del Peñol en Guatapé">
+            <img src="img/piedra-base.webp" alt="Vista de la Piedra del Peñol en Guatapé" fetchpriority="high">
             <figcaption class="hero-caption">
               <small>Destino extraordinario</small>
               <strong>Guatapé, Colombia</strong>
@@ -855,7 +862,7 @@
 
         <div class="services-grid" id="servicesGrid">
           <article class="service-card featured reveal" data-category="aire">
-            <img src="img/helicoptero-piedra.webp" alt="Helicóptero sobrevolando la Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-piedra.webp" fetchpriority="low" alt="Helicóptero sobrevolando la Piedra del Peñol" loading="lazy" decoding="async">
             <span class="service-number">01</span><span class="service-category">Aire</span>
             <div class="service-content">
               <h3>Vuelo en helicóptero</h3>
@@ -865,7 +872,7 @@
           </article>
 
           <article class="service-card reveal" data-category="tierra">
-            <img src="img/cuatrimoto-grupo.webp" alt="Grupo durante una ruta en cuatrimoto" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-grupo.webp" fetchpriority="low" alt="Grupo durante una ruta en cuatrimoto" loading="lazy" decoding="async">
             <span class="service-number">02</span><span class="service-category">Tierra</span>
             <div class="service-content">
               <h3>Ruta en cuatrimoto</h3>
@@ -875,7 +882,7 @@
           </article>
 
           <article class="service-card reveal" data-category="destino">
-            <img src="img/piedra-letrero.webp" alt="La Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-letrero.webp" fetchpriority="low" alt="La Piedra del Peñol" loading="lazy" decoding="async">
             <span class="service-number">03</span><span class="service-category">Destino</span>
             <div class="service-content">
               <h3>La Piedra</h3>
@@ -885,7 +892,7 @@
           </article>
 
           <article class="service-card reveal" data-category="destino">
-            <img src="img/pueblo-plaza.webp" alt="Plaza colorida de Guatapé" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-plaza.webp" fetchpriority="low" alt="Plaza colorida de Guatapé" loading="lazy" decoding="async">
             <span class="service-number">04</span><span class="service-category">Destino</span>
             <div class="service-content">
               <h3>Pueblo de Guatapé</h3>
@@ -895,7 +902,7 @@
           </article>
 
           <article class="service-card reveal" data-category="destino">
-            <img src="img/helicoptero-vista.webp" alt="Vista aérea del embalse de Guatapé" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-vista.webp" fetchpriority="low" alt="Vista aérea del embalse de Guatapé" loading="lazy" decoding="async">
             <span class="service-number">05</span><span class="service-category">Destino</span>
             <div class="service-content">
               <h3>Embalse de Guatapé</h3>
@@ -905,7 +912,7 @@
           </article>
 
           <article class="service-card reveal" data-category="estadia">
-            <img src="img/hotel-03.webp" alt="Hospedaje junto a la Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-03.webp" fetchpriority="low" alt="Hospedaje junto a la Piedra del Peñol" loading="lazy" decoding="async">
             <span class="service-number">06</span><span class="service-category">Hospedaje</span>
             <div class="service-content">
               <h3>Hospedaje en Guatapé</h3>
@@ -929,7 +936,7 @@
 
         <div class="nautical-grid">
           <article class="nautical-card reveal">
-            <img src="img/jetski-04.webp" alt="Visitante recorriendo el embalse en Jet Ski" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/jetski-04.webp" fetchpriority="low" alt="Visitante recorriendo el embalse en Jet Ski" loading="lazy" decoding="async">
             <span class="nautical-number">01</span><span class="nautical-real">Fotos reales</span>
             <div class="nautical-content">
               <h3>Jet Ski</h3>
@@ -939,7 +946,7 @@
           </article>
 
           <article class="nautical-card reveal">
-            <img src="img/jetski-simple-02.webp" alt="Jet Ski sencillo frente a la Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/jetski-simple-02.webp" fetchpriority="low" alt="Jet Ski sencillo frente a la Piedra del Peñol" loading="lazy" decoding="async">
             <span class="nautical-number">02</span><span class="nautical-real">Fotos reales</span>
             <div class="nautical-content">
               <h3>Jet Ski sencillo</h3>
@@ -949,7 +956,7 @@
           </article>
 
           <article class="nautical-card reveal">
-            <img src="img/lancha7-01.webp" alt="Interior de la lancha con capacidad máxima para siete personas" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/lancha7-01.webp" fetchpriority="low" alt="Interior de la lancha con capacidad máxima para siete personas" loading="lazy" decoding="async">
             <span class="nautical-number">03</span><span class="nautical-real">Fotos reales</span>
             <div class="nautical-content">
               <h3>Lancha · hasta 7 personas</h3>
@@ -959,7 +966,7 @@
           </article>
 
           <article class="nautical-card reveal">
-            <img src="img/lancha5-02.webp" alt="Lancha para máximo cinco personas frente a la Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/lancha5-02.webp" fetchpriority="low" alt="Lancha para máximo cinco personas frente a la Piedra del Peñol" loading="lazy" decoding="async">
             <span class="nautical-number">04</span><span class="nautical-real">Fotos y video</span>
             <div class="nautical-content">
               <h3>Lancha · hasta 5 personas</h3>
@@ -969,7 +976,7 @@
           </article>
 
           <article class="nautical-card reveal">
-            <img src="img/planchon-03.webp" alt="Planchón navegando frente a la Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/planchon-03.webp" fetchpriority="low" alt="Planchón navegando frente a la Piedra del Peñol" loading="lazy" decoding="async">
             <span class="nautical-number">05</span><span class="nautical-real">Fotos reales</span>
             <div class="nautical-content">
               <h3>Planchones</h3>
@@ -985,7 +992,7 @@
             <h3>Conoce la lancha de hasta 5 personas.</h3>
             <p>Revisa sus espacios y detalles antes de consultar disponibilidad, recorrido y condiciones directamente con el equipo.</p>
           </div>
-          <video controls playsinline preload="metadata" poster="img/lancha5-03.webp">
+          <video controls playsinline preload="none" poster="img/lancha5-03.webp">
             <source src="video/lancha-5-video.mp4" type="video/mp4">
           </video>
         </div>
@@ -1008,17 +1015,17 @@
           <div class="journey-line" aria-hidden="true"></div>
           <article class="journey-card reveal">
             <span class="journey-dot" aria-hidden="true"></span>
-            <div class="journey-media"><img src="img/pueblo-calle.webp" alt="Calle de los paraguas en Guatapé" loading="lazy"><span class="journey-index">01</span></div>
+            <div class="journey-media"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-calle.webp" fetchpriority="low" alt="Calle de los paraguas en Guatapé" loading="lazy"><span class="journey-index">01</span></div>
             <div class="journey-body"><h3>Empieza con el color</h3><p>Calles, zócalos y fachadas convierten el pueblo en un recorrido lleno de detalles y escenas diferentes.</p></div>
           </article>
           <article class="journey-card reveal">
             <span class="journey-dot" aria-hidden="true"></span>
-            <div class="journey-media"><img src="img/cuatrimoto-bosque.webp" alt="Ruta de cuatrimotos entre árboles" loading="lazy"><span class="journey-index">02</span></div>
+            <div class="journey-media"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-bosque.webp" fetchpriority="low" alt="Ruta de cuatrimotos entre árboles" loading="lazy"><span class="journey-index">02</span></div>
             <div class="journey-body"><h3>Sigue por tierra</h3><p>Los caminos rurales conectan bosque, montaña, agua y distintos puntos para detenerse a mirar el paisaje.</p></div>
           </article>
           <article class="journey-card reveal">
             <span class="journey-dot" aria-hidden="true"></span>
-            <div class="journey-media"><img src="img/helicoptero-piedra.webp" alt="Helicóptero junto a la Piedra del Peñol" loading="lazy"><span class="journey-index">03</span></div>
+            <div class="journey-media"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-piedra.webp" fetchpriority="low" alt="Helicóptero junto a la Piedra del Peñol" loading="lazy"><span class="journey-index">03</span></div>
             <div class="journey-body"><h3>Termina desde el aire</h3><p>Desde arriba, la Piedra, el embalse, las islas y las montañas aparecen dentro de una sola panorámica.</p></div>
           </article>
         </div>
@@ -1038,10 +1045,10 @@
         <article class="experience-story land reveal">
           <div class="story-media">
             <span class="story-badge">Experiencia de tierra</span>
-            <figure><img src="img/cuatrimoto-grupo.webp" alt="Grupo de visitantes en cuatrimotos frente al paisaje" loading="lazy" decoding="async"></figure>
-            <figure><img src="img/cuatrimoto-celebracion.webp" alt="Visitante celebrando sobre una cuatrimoto" loading="lazy" decoding="async"></figure>
-            <figure class="portrait"><img src="img/cuatrimoto-puente.webp" alt="Cuatrimoto atravesando un puente" loading="lazy" decoding="async"></figure>
-            <figure><img src="img/cuatrimoto-charco.webp" alt="Cuatrimoto recorriendo un camino con agua" loading="lazy" decoding="async"></figure>
+            <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-grupo.webp" fetchpriority="low" alt="Grupo de visitantes en cuatrimotos frente al paisaje" loading="lazy" decoding="async"></figure>
+            <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-celebracion.webp" fetchpriority="low" alt="Visitante celebrando sobre una cuatrimoto" loading="lazy" decoding="async"></figure>
+            <figure class="portrait"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-puente.webp" fetchpriority="low" alt="Cuatrimoto atravesando un puente" loading="lazy" decoding="async"></figure>
+            <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-charco.webp" fetchpriority="low" alt="Cuatrimoto recorriendo un camino con agua" loading="lazy" decoding="async"></figure>
           </div>
           <div class="story-copy">
             <span class="kicker">Recorre · Descubre · Detente</span>
@@ -1076,10 +1083,10 @@
         <article class="experience-story air reveal">
           <div class="story-media">
             <span class="story-badge">Experiencia de aire</span>
-            <figure><img src="img/helicoptero-piedra.webp" alt="Helicóptero volando sobre la Piedra y el embalse" loading="lazy" decoding="async"></figure>
-            <figure class="portrait"><img src="img/helicoptero-cabina.webp" alt="Momento dentro del helicóptero" loading="lazy" decoding="async"></figure>
-            <figure><img src="img/helicoptero-vista.webp" alt="Vista del embalse desde la cabina" loading="lazy" decoding="async"></figure>
-            <figure class="poster"><img src="img/helicoptero-poster.webp" alt="Pieza visual sobre el vuelo sobre El Peñol" loading="lazy" decoding="async"></figure>
+            <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-piedra.webp" fetchpriority="low" alt="Helicóptero volando sobre la Piedra y el embalse" loading="lazy" decoding="async"></figure>
+            <figure class="portrait"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-cabina.webp" fetchpriority="low" alt="Momento dentro del helicóptero" loading="lazy" decoding="async"></figure>
+            <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-vista.webp" fetchpriority="low" alt="Vista del embalse desde la cabina" loading="lazy" decoding="async"></figure>
+            <figure class="poster"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-poster.webp" fetchpriority="low" alt="Pieza visual sobre el vuelo sobre El Peñol" loading="lazy" decoding="async"></figure>
           </div>
           <div class="story-copy">
             <span class="kicker light">La escala cambia desde arriba</span>
@@ -1149,23 +1156,23 @@
 
         <div class="stay-gallery reveal">
           <figure>
-            <img src="img/hotel-03.webp" alt="Hospedaje con piscina junto a la Piedra del Peñol" loading="lazy" decoding="async">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-03.webp" fetchpriority="low" alt="Hospedaje con piscina junto a la Piedra del Peñol" loading="lazy" decoding="async">
             <figcaption class="stay-visual-label">Fotografías reales</figcaption>
           </figure>
-          <figure><img src="img/hotel-08.webp" alt="Habitación de estilo rústico" loading="lazy" decoding="async"></figure>
-          <figure><img src="img/hotel-13.webp" alt="Habitación con vista panorámica" loading="lazy" decoding="async"></figure>
-          <figure><img src="img/hotel-15.webp" alt="Terraza con jacuzzi y vista al paisaje" loading="lazy" decoding="async"></figure>
-          <figure><img src="img/hotel-02.webp" alt="Hospedaje y piscina durante el atardecer" loading="lazy" decoding="async"></figure>
+          <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-08.webp" fetchpriority="low" alt="Habitación de estilo rústico" loading="lazy" decoding="async"></figure>
+          <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-13.webp" fetchpriority="low" alt="Habitación con vista panorámica" loading="lazy" decoding="async"></figure>
+          <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-15.webp" fetchpriority="low" alt="Terraza con jacuzzi y vista al paisaje" loading="lazy" decoding="async"></figure>
+          <figure><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-02.webp" fetchpriority="low" alt="Hospedaje y piscina durante el atardecer" loading="lazy" decoding="async"></figure>
         </div>
       </div>
     </section>
 
     <section class="reel" aria-label="Reel visual de Guatapé">
       <div class="reel-frame" id="reelFrame">
-        <figure class="reel-slide active"><img src="img/pueblo-plaza.webp" alt="Plaza llena de color en Guatapé" decoding="async"></figure>
-        <figure class="reel-slide"><img src="img/piedra-base.webp" alt="Vista de la Piedra del Peñol" loading="lazy" decoding="async"></figure>
-        <figure class="reel-slide"><img src="img/cuatrimoto-grupo.webp" alt="Grupo durante una experiencia en cuatrimoto" loading="lazy" decoding="async"></figure>
-        <figure class="reel-slide"><img src="img/helicoptero-vista.webp" alt="Vista aérea del embalse desde un helicóptero" loading="lazy" decoding="async"></figure>
+        <figure class="reel-slide active"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-plaza.webp" fetchpriority="low" alt="Plaza llena de color en Guatapé" loading="lazy" decoding="async"></figure>
+        <figure class="reel-slide"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-base.webp" fetchpriority="low" alt="Vista de la Piedra del Peñol" loading="lazy" decoding="async"></figure>
+        <figure class="reel-slide"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-grupo.webp" fetchpriority="low" alt="Grupo durante una experiencia en cuatrimoto" loading="lazy" decoding="async"></figure>
+        <figure class="reel-slide"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-vista.webp" fetchpriority="low" alt="Vista aérea del embalse desde un helicóptero" loading="lazy" decoding="async"></figure>
         <div class="reel-copy reveal">
           <span class="kicker light">Un destino que se siente</span>
           <h2>Guatapé no se explica. Se vive.</h2>
@@ -1276,7 +1283,7 @@
           </section>
 
           <aside class="map-card reveal">
-            <div class="map-card-media"><img id="mapImage" src="img/piedra-base.webp" alt="Piedra del Peñol" decoding="async"></div>
+            <div class="map-card-media"><img id="mapImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-base.webp" fetchpriority="low" alt="Piedra del Peñol" loading="lazy" decoding="async"></div>
             <div class="map-card-body">
               <span class="map-card-count" id="mapCount">Punto 01 · Piedra del Peñol</span>
               <h3 id="mapTitle">Piedra del Peñol</h3>
@@ -1295,8 +1302,8 @@
     <section class="section about" id="nosotros" data-nav-section>
       <div class="wrap about-grid">
         <div class="about-collage reveal">
-          <figure class="about-photo main"><img src="img/pueblo-letras.webp" alt="Letras de Guatapé junto al embalse" loading="lazy" decoding="async"></figure>
-          <figure class="about-photo small"><img src="img/piedra-mirador.webp" alt="Vista de La Piedra desde uno de sus puntos fotográficos" loading="lazy" decoding="async"></figure>
+          <figure class="about-photo main"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-letras.webp" fetchpriority="low" alt="Letras de Guatapé junto al embalse" loading="lazy" decoding="async"></figure>
+          <figure class="about-photo small"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-mirador.webp" fetchpriority="low" alt="Vista de La Piedra desde uno de sus puntos fotográficos" loading="lazy" decoding="async"></figure>
           <div class="about-badge">360°<span>de aventura</span></div>
         </div>
 
@@ -1331,31 +1338,31 @@
         </div>
 
         <div class="gallery-grid">
-          <button class="gallery-item wide tall reveal" type="button" data-gallery="0"><img src="img/pueblo-calle.webp" alt="Calle de los paraguas en Guatapé" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="1"><img src="img/piedra-letrero.webp" alt="La Piedra del Peñol y su letrero" loading="lazy" decoding="async"></button>
-          <button class="gallery-item tall reveal" type="button" data-gallery="2"><img src="img/cuatrimoto-puente.webp" alt="Recorrido en cuatrimoto sobre un puente" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="3"><img src="img/helicoptero-cabina.webp" alt="Experiencia dentro del helicóptero" loading="lazy" decoding="async"></button>
-          <button class="gallery-item wide reveal" type="button" data-gallery="4"><img src="img/pueblo-letras.webp" alt="Letras de Guatapé junto al agua" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="5"><img src="img/cuatrimoto-camino.webp" alt="Cuatrimoto recorriendo un camino rural" loading="lazy" decoding="async"></button>
-          <button class="gallery-item wide reveal" type="button" data-gallery="6"><img src="img/helicoptero-vista.webp" alt="Vista del embalse desde la cabina" loading="lazy" decoding="async"></button>
-          <button class="gallery-item tall reveal" type="button" data-gallery="7"><img src="img/piedra-mirador.webp" alt="Punto fotográfico frente a La Piedra" loading="lazy" decoding="async"></button>
-          <button class="gallery-item wide reveal" type="button" data-gallery="8"><img src="img/cuatrimoto-lago.webp" alt="Cuatrimoto junto al paisaje del lago" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="9"><img src="img/pueblo-plaza.webp" alt="Plaza colorida de Guatapé" loading="lazy" decoding="async"></button>
-          <button class="gallery-item wide reveal" type="button" data-gallery="10"><img src="img/jetski-04.webp" alt="Experiencia real en Jet Ski sobre el embalse" loading="lazy" decoding="async"></button>
-          <button class="gallery-item tall reveal" type="button" data-gallery="11"><img src="img/lancha5-02.webp" alt="Lancha frente a la Piedra del Peñol" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="12"><img src="img/lancha7-02.webp" alt="Interior de la lancha para hasta siete personas" loading="lazy" decoding="async"></button>
-          <button class="gallery-item wide reveal" type="button" data-gallery="13"><img src="img/planchon-03.webp" alt="Planchón navegando frente a la Piedra del Peñol" loading="lazy" decoding="async"></button>
-          <button class="gallery-item tall reveal" type="button" data-gallery="14"><img src="img/hotel-03.webp" alt="Hospedaje con piscina junto a la Piedra del Peñol" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="15"><img src="img/hotel-08.webp" alt="Habitación real del hospedaje" loading="lazy" decoding="async"></button>
-          <button class="gallery-item wide reveal" type="button" data-gallery="16"><img src="img/hotel-02.webp" alt="Hospedaje y piscina al atardecer" loading="lazy" decoding="async"></button>
-          <button class="gallery-item reveal" type="button" data-gallery="17"><img src="img/hotel-15.webp" alt="Terraza con jacuzzi y vista al paisaje" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide tall reveal" type="button" data-gallery="0"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-calle.webp" fetchpriority="low" alt="Calle de los paraguas en Guatapé" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="1"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-letrero.webp" fetchpriority="low" alt="La Piedra del Peñol y su letrero" loading="lazy" decoding="async"></button>
+          <button class="gallery-item tall reveal" type="button" data-gallery="2"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-puente.webp" fetchpriority="low" alt="Recorrido en cuatrimoto sobre un puente" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="3"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-cabina.webp" fetchpriority="low" alt="Experiencia dentro del helicóptero" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide reveal" type="button" data-gallery="4"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-letras.webp" fetchpriority="low" alt="Letras de Guatapé junto al agua" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="5"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-camino.webp" fetchpriority="low" alt="Cuatrimoto recorriendo un camino rural" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide reveal" type="button" data-gallery="6"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-vista.webp" fetchpriority="low" alt="Vista del embalse desde la cabina" loading="lazy" decoding="async"></button>
+          <button class="gallery-item tall reveal" type="button" data-gallery="7"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-mirador.webp" fetchpriority="low" alt="Punto fotográfico frente a La Piedra" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide reveal" type="button" data-gallery="8"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-lago.webp" fetchpriority="low" alt="Cuatrimoto junto al paisaje del lago" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="9"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-plaza.webp" fetchpriority="low" alt="Plaza colorida de Guatapé" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide reveal" type="button" data-gallery="10"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/jetski-04.webp" fetchpriority="low" alt="Experiencia real en Jet Ski sobre el embalse" loading="lazy" decoding="async"></button>
+          <button class="gallery-item tall reveal" type="button" data-gallery="11"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/lancha5-02.webp" fetchpriority="low" alt="Lancha frente a la Piedra del Peñol" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="12"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/lancha7-02.webp" fetchpriority="low" alt="Interior de la lancha para hasta siete personas" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide reveal" type="button" data-gallery="13"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/planchon-03.webp" fetchpriority="low" alt="Planchón navegando frente a la Piedra del Peñol" loading="lazy" decoding="async"></button>
+          <button class="gallery-item tall reveal" type="button" data-gallery="14"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-03.webp" fetchpriority="low" alt="Hospedaje con piscina junto a la Piedra del Peñol" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="15"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-08.webp" fetchpriority="low" alt="Habitación real del hospedaje" loading="lazy" decoding="async"></button>
+          <button class="gallery-item wide reveal" type="button" data-gallery="16"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-02.webp" fetchpriority="low" alt="Hospedaje y piscina al atardecer" loading="lazy" decoding="async"></button>
+          <button class="gallery-item reveal" type="button" data-gallery="17"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-15.webp" fetchpriority="low" alt="Terraza con jacuzzi y vista al paisaje" loading="lazy" decoding="async"></button>
         </div>
       </div>
     </section>
 
     <section class="closing section" id="contacto">
       <div class="closing-card reveal">
-        <img src="img/helicoptero-piedra.webp" alt="Panorama de La Piedra y el embalse" loading="lazy">
+        <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-piedra.webp" fetchpriority="low" alt="Panorama de La Piedra y el embalse" loading="lazy">
         <div class="closing-content">
           <span class="kicker light">Tu próxima historia</span>
           <h2>Comienza en Guatapé.</h2>
@@ -1417,8 +1424,11 @@
     <div class="service-dialog">
       <div class="dialog-grid">
         <div class="dialog-media">
-          <img class="dialog-main" id="dialogMainImage" src="img/helicoptero-piedra.webp" alt="">
+          <img class="dialog-main" id="dialogMainImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt="">
           <button class="dialog-close" type="button" data-close-service aria-label="Cerrar">×</button>
+          <button class="dialog-nav dialog-prev" type="button" id="dialogPrev" aria-label="Imagen anterior">‹</button>
+          <button class="dialog-nav dialog-next" type="button" id="dialogNext" aria-label="Imagen siguiente">›</button>
+          <span class="dialog-count" id="dialogCount">1 / 1</span>
           <div class="dialog-thumbs" id="dialogThumbs"></div>
         </div>
         <div class="dialog-body">
@@ -1435,7 +1445,7 @@
   <dialog class="lightbox" id="lightbox" aria-label="Galería a pantalla completa">
     <button class="lightbox-close" type="button" data-close-lightbox aria-label="Cerrar">×</button>
     <button class="lightbox-nav lightbox-prev" type="button" id="lightboxPrev" aria-label="Imagen anterior">‹</button>
-    <div class="lightbox-wrap"><img id="lightboxImage" src="img/pueblo-calle.webp" alt=""></div>
+    <div class="lightbox-wrap"><img id="lightboxImage" src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" alt=""></div>
     <button class="lightbox-nav lightbox-next" type="button" id="lightboxNext" aria-label="Imagen siguiente">›</button>
     <span class="lightbox-count" id="lightboxCount">1 / 18</span>
   </dialog>
@@ -1446,12 +1456,42 @@
     const numberedMedia = (base, prefix, count) =>
       Array.from({ length: count }, (_, index) => `${base}/${prefix}-${String(index + 1).padStart(2, "0")}.webp`);
 
-    const hotelImages = numberedMedia("./imagen", "hotel", 19);
-    const jetskiImages = numberedMedia("./imagen", "jetski", 6);
-    const jetskiSimpleImages = numberedMedia("./imagen", "jetski-simple", 2);
-    const lancha7Images = numberedMedia("./imagen", "lancha7", 2);
-    const lancha5Images = numberedMedia("./imagen", "lancha5", 3);
-    const planchonImages = numberedMedia("./imagen", "planchon", 3);
+    const mediaPlaceholder = "data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=";
+    let deferredMediaObserver = null;
+
+    function loadDeferredImage(image) {
+      const source = image.dataset.src;
+      if (!source) return;
+      image.src = source;
+      image.removeAttribute("data-src");
+      deferredMediaObserver?.unobserve(image);
+    }
+
+    function observeDeferredMedia(scope = document) {
+      const images = $$("img[data-src]", scope);
+      if (!images.length) return;
+      if (!("IntersectionObserver" in window)) {
+        images.forEach(loadDeferredImage);
+        return;
+      }
+      if (!deferredMediaObserver) {
+        deferredMediaObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) loadDeferredImage(entry.target);
+          });
+        }, { rootMargin: "420px 0px", threshold: 0.01 });
+      }
+      images.forEach(image => deferredMediaObserver.observe(image));
+    }
+
+    observeDeferredMedia();
+
+    const hotelImages = numberedMedia("img", "hotel", 19);
+    const jetskiImages = numberedMedia("img", "jetski", 6);
+    const jetskiSimpleImages = numberedMedia("img", "jetski-simple", 2);
+    const lancha7Images = numberedMedia("img", "lancha7", 2);
+    const lancha5Images = numberedMedia("img", "lancha5", 3);
+    const planchonImages = numberedMedia("img", "planchon", 3);
     const piedraImage = "img/piedra-base.webp";
 
     const embalseImage = "img/helicoptero-vista.webp";
@@ -1593,8 +1633,6 @@
       { src: "img/hotel-15.webp", alt: "Terraza con jacuzzi y vista al paisaje" }
     ];
 
-    $("#mapImage").src = piedraImage;
-
     const siteHeader = $("#siteHeader");
     const progressCompass = $("#progressCompass");
     const onScroll = () => {
@@ -1689,15 +1727,31 @@
     const dialogDescription = $("#dialogDescription");
     const dialogFeatures = $("#dialogFeatures");
     const dialogWhatsApp = $("#dialogWhatsApp");
+    const dialogCount = $("#dialogCount");
+    let activeServiceData = null;
+    let activeDialogIndex = 0;
 
     function updateDialogImage(data, index) {
+      const normalizedIndex = (index + data.images.length) % data.images.length;
+      activeServiceData = data;
+      activeDialogIndex = normalizedIndex;
       dialogMainImage.style.opacity = "0";
       window.setTimeout(() => {
-        dialogMainImage.src = data.images[index];
-        dialogMainImage.alt = data.alts[index];
+        dialogMainImage.src = data.images[normalizedIndex];
+        dialogMainImage.alt = data.alts[normalizedIndex];
         dialogMainImage.style.opacity = "1";
       }, 130);
-      $$(".dialog-thumb", dialogThumbs).forEach((thumb, thumbIndex) => thumb.classList.toggle("active", thumbIndex === index));
+      dialogCount.textContent = `${normalizedIndex + 1} / ${data.images.length}`;
+      $$(".dialog-thumb", dialogThumbs).forEach((thumb, thumbIndex) => {
+        thumb.classList.toggle("active", thumbIndex === normalizedIndex);
+      });
+      const activeThumb = $$(".dialog-thumb", dialogThumbs)[normalizedIndex];
+      if (serviceDialog.open && activeThumb) {
+        dialogThumbs.scrollTo({
+          left: activeThumb.offsetLeft - dialogThumbs.clientWidth / 2 + activeThumb.clientWidth / 2,
+          behavior: "smooth"
+        });
+      }
     }
 
     function openService(serviceKey) {
@@ -1706,12 +1760,11 @@
       dialogCategory.textContent = data.category;
       dialogTitle.textContent = data.title;
       dialogDescription.textContent = data.description;
-      dialogMainImage.src = data.images[0];
-      dialogMainImage.alt = data.alts[0];
       dialogThumbs.innerHTML = data.images.map((image, index) => `
         <button class="dialog-thumb ${index === 0 ? "active" : ""}" type="button" data-dialog-image="${index}" aria-label="Ver imagen ${index + 1}">
-          <img src="${image}" alt="" loading="lazy" decoding="async">
+          <img src="${mediaPlaceholder}" data-src="${image}" fetchpriority="low" alt="" loading="lazy" decoding="async">
         </button>`).join("");
+      observeDeferredMedia(dialogThumbs);
       dialogFeatures.innerHTML = data.features.map(feature => `<div class="dialog-feature"><span>✓</span>${feature}</div>`).join("");
       dialogWhatsApp.href = `https://wa.me/573233896843?text=${encodeURIComponent(`Hola Aventura 360, quiero información sobre ${data.title} en Guatapé`)}`;
       dialogWhatsApp.textContent = data.category === "Experiencia náutica"
@@ -1720,11 +1773,18 @@
           ? "Consultar disponibilidad del hospedaje"
           : "Consultar esta experiencia por WhatsApp";
       $$("[data-dialog-image]", dialogThumbs).forEach(button => button.addEventListener("click", () => updateDialogImage(data, Number(button.dataset.dialogImage))));
+      updateDialogImage(data, 0);
       serviceDialog.showModal();
       document.body.classList.add("dialog-open");
     }
 
     $$("[data-service]").forEach(button => button.addEventListener("click", () => openService(button.dataset.service)));
+    $("#dialogPrev").addEventListener("click", () => {
+      if (activeServiceData) updateDialogImage(activeServiceData, activeDialogIndex - 1);
+    });
+    $("#dialogNext").addEventListener("click", () => {
+      if (activeServiceData) updateDialogImage(activeServiceData, activeDialogIndex + 1);
+    });
     $("[data-close-service]").addEventListener("click", () => serviceDialog.close());
     serviceDialog.addEventListener("click", event => {
       if (event.target === serviceDialog) serviceDialog.close();
@@ -1758,6 +1818,7 @@
     const mapKeys = ["piedra", "embalse", "pueblo"];
     let mapCycleIndex = 0;
     let mapCycleTimer = null;
+    let mapSectionVisible = false;
 
     function scheduleMapCycle(delay = 3600) {
       window.clearTimeout(mapCycleTimer);
@@ -1788,10 +1849,18 @@
       setMapPoint(control.dataset.map);
       scheduleMapCycle(6500);
     }));
-    scheduleMapCycle();
+    const mapSectionObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        mapSectionVisible = entry.isIntersecting;
+        if (mapSectionVisible) scheduleMapCycle();
+        else window.clearTimeout(mapCycleTimer);
+      });
+    }, { rootMargin: "240px 0px", threshold: 0.01 });
+    mapSectionObserver.observe($("#destinos"));
+
     document.addEventListener("visibilitychange", () => {
       if (document.hidden) window.clearTimeout(mapCycleTimer);
-      else scheduleMapCycle(1200);
+      else if (mapSectionVisible) scheduleMapCycle(1200);
     });
 
     const counterObserver = new IntersectionObserver(entries => {
@@ -1839,6 +1908,11 @@
 
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") closeMenu();
+      if (serviceDialog.open && !lightbox.open) {
+        if (event.key === "ArrowLeft" && activeServiceData) updateDialogImage(activeServiceData, activeDialogIndex - 1);
+        if (event.key === "ArrowRight" && activeServiceData) updateDialogImage(activeServiceData, activeDialogIndex + 1);
+        return;
+      }
       if (!lightbox.open) return;
       if (event.key === "ArrowLeft") renderLightbox(lightboxIndex - 1);
       if (event.key === "ArrowRight") renderLightbox(lightboxIndex + 1);
