@@ -49,6 +49,19 @@
       overflow-x:hidden;
     }
     body.menu-open,body.dialog-open{overflow:hidden}
+    main{display:flex;flex-direction:column}
+    main>.hero{order:1}
+    main>.marquee{order:2}
+    main>.services-section{order:3}
+    main>.story-showcase{order:4}
+    main>.nautical-section{order:5}
+    main>.stay-section{order:6}
+    main>.journey{order:7}
+    main>.reel{order:8}
+    main>.destinations{order:9}
+    main>.about{order:10}
+    main>.gallery-section{order:11}
+    main>.closing{order:12}
     a{color:inherit;text-decoration:none}
     button{font:inherit}
     img{display:block;width:100%;height:auto}
@@ -797,10 +810,11 @@
 
       <nav class="nav-links" id="navLinks" aria-label="Navegación principal">
         <a href="#experiencias" data-section="experiencias">Experiencias</a>
-        <a href="#recorrido" data-section="recorrido">Recorrido</a>
+        <a href="#nautico" data-section="nautico">Náutico</a>
+        <a href="#hospedaje" data-section="hospedaje">Hospedaje</a>
         <a href="#destinos" data-section="destinos">Destinos</a>
         <a href="#nosotros" data-section="nosotros">Nosotros</a>
-        <a href="#contacto" data-section="contacto">Reservar</a>
+        <a href="#galeria" data-section="galeria">Galería</a>
       </nav>
 
       <div class="nav-actions">
@@ -964,7 +978,7 @@
       </div>
     </section>
 
-    <section class="section nautical-section" id="nautico" hidden>
+    <section class="section nautical-section" id="nautico" data-nav-section>
       <div class="wrap">
         <div class="section-head reveal">
           <div class="section-copy">
@@ -1072,13 +1086,13 @@
       </div>
     </section>
 
-    <section class="section story-showcase" aria-label="Experiencias destacadas de Guatapé" hidden>
+    <section class="section story-showcase" id="destacadas" aria-label="Experiencias destacadas de Guatapé">
       <div class="wrap">
         <div class="section-head reveal">
           <div class="section-copy">
-            <span class="kicker">Historias reales del recorrido</span>
-            <h2>La aventura, vista de cerca</h2>
-            <p>Fotografías y videos reales, organizados para mostrar cómo se vive cada experiencia.</p>
+            <span class="kicker">Experiencias de aire y tierra</span>
+            <h2>Cuatrimotos y helicóptero, de cerca</h2>
+            <p>Esta sección reúne únicamente el material detallado, las rutas y los videos reales de estas dos experiencias.</p>
           </div>
         </div>
 
@@ -1176,7 +1190,7 @@
       </div>
     </section>
 
-    <section class="section stay-section" id="hospedaje" aria-label="Opciones de hospedaje en Guatapé" hidden>
+    <section class="section stay-section" id="hospedaje" data-nav-section aria-label="Opciones de hospedaje en Guatapé">
       <div class="wrap stay-grid">
         <div class="stay-copy reveal">
           <span class="kicker">Descansa y completa el viaje</span>
@@ -1363,7 +1377,7 @@
       </div>
     </section>
 
-    <section class="section gallery-section" id="galeria" hidden>
+    <section class="section gallery-section" id="galeria" data-nav-section>
       <div class="wrap">
         <div class="section-head reveal">
           <div class="section-copy">
@@ -1435,10 +1449,11 @@
           <h4>Explora</h4>
           <ul>
             <li><a href="#experiencias">Experiencias</a></li>
-            <li><a href="#recorrido">Recorrido 360°</a></li>
+            <li><a href="#destacadas">Aire y tierra</a></li>
+            <li><a href="#nautico">Experiencias náuticas</a></li>
+            <li><a href="#hospedaje">Hospedaje</a></li>
             <li><a href="#destinos">Mapa visual</a></li>
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#contacto">Reservar</a></li>
+            <li><a href="#galeria">Galería</a></li>
           </ul>
         </div>
         <div>
