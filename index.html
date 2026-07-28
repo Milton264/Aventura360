@@ -275,6 +275,7 @@
       position:relative;inset:auto;width:100%;height:auto!important;aspect-ratio:2/1;
       object-fit:contain;object-position:center;background:#031f1d;flex:0 0 auto;
     }
+    .service-card.poster-card.poster-compact>img{aspect-ratio:3/2}
     .service-card.poster-card::after{display:none}
     .service-card.poster-card .service-content{
       position:relative;left:auto;right:auto;bottom:auto;display:flex;flex-direction:column;
@@ -978,6 +979,26 @@
               <button class="service-open" type="button" data-service="hospedaje">Ver publicidad y fotografías <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
+
+          <article class="service-card poster-card poster-compact service-wide reveal" data-category="agua">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-wakeboard.webp" fetchpriority="low" alt="Publicidad de la experiencia de Wakeboard en Guatapé" loading="lazy" decoding="async">
+            <span class="service-number">07</span><span class="service-category">Agua</span>
+            <div class="service-content">
+              <h3>Wakeboard en Guatapé</h3>
+              <p>Adrenalina sobre el agua con equipo profesional, instructores y el embalse como escenario.</p>
+              <button class="service-open" type="button" data-service="wakeboard">Ver experiencia <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+            </div>
+          </article>
+
+          <article class="service-card poster-card poster-compact service-wide reveal" data-category="estadia">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-dia-de-sol.webp" fetchpriority="low" alt="Publicidad del plan Día de Sol en Guatapé" loading="lazy" decoding="async">
+            <span class="service-number">08</span><span class="service-category">Plan de descanso</span>
+            <div class="service-content">
+              <h3>Día de Sol en Guatapé</h3>
+              <p>Piscina, zonas verdes, descanso, almuerzo y refrigerio para disfrutar un día completo.</p>
+              <button class="service-open" type="button" data-service="diaDeSol">Ver experiencia <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+            </div>
+          </article>
         </div>
         <p class="nautical-safety unified-note"><b>Una experiencia, toda la información:</b> abre cualquier tarjeta para recorrer su galería completa, conocer sus opciones y consultar disponibilidad. Las condiciones y requisitos se confirman directamente con el operador.</p>
       </div>
@@ -1634,6 +1655,22 @@
         images: ["img/poster-hospedaje.webp", ...hotelImages],
         alts: ["Publicidad de hoteles y cabañas en Guatapé", ...hotelImages.map((_, index) => `Fotografía real del hospedaje ${index + 1}`)],
         features: ["19 fotografías reales organizadas en una sola galería", "Opciones para parejas, familias y grupos", "Disponibilidad y características confirmadas por WhatsApp"]
+      },
+      wakeboard: {
+        category: "Experiencia náutica",
+        title: "Wakeboard en Guatapé",
+        description: "Deslízate sobre el agua y vive una experiencia de adrenalina en el embalse de Guatapé, con acompañamiento y condiciones de seguridad confirmadas directamente con el operador.",
+        images: ["img/poster-wakeboard.webp"],
+        alts: ["Publicidad de la experiencia de Wakeboard en Guatapé"],
+        features: ["Equipo profesional", "Acompañamiento de instructores", "Disponibilidad y requisitos de seguridad confirmados con el operador"]
+      },
+      diaDeSol: {
+        category: "Plan de descanso",
+        title: "Día de Sol en Guatapé",
+        description: "Un plan para relajarte y disfrutar del paisaje con piscina, zonas verdes, almuerzo y refrigerio. La disponibilidad y las condiciones se confirman directamente por WhatsApp.",
+        images: ["img/poster-dia-de-sol.webp"],
+        alts: ["Publicidad del plan Día de Sol en Guatapé"],
+        features: ["Piscina y zonas verdes", "Almuerzo y refrigerio", "Disponibilidad y condiciones confirmadas por WhatsApp"]
       },
       jetski: {
         category: "Experiencia náutica",
