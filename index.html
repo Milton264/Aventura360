@@ -538,6 +538,10 @@
     .gallery-item::after{content:"↗";position:absolute;right:14px;top:14px;width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.88);display:grid;place-items:center;color:var(--deep);font-size:1.1rem;opacity:0;transform:translateY(6px);transition:.25s ease;pointer-events:none}
     .gallery-item:hover img{transform:scale(1.06);filter:saturate(1.08)}
     .gallery-item:hover::after{opacity:1;transform:none}
+    .gallery-grid.is-collapsed .gallery-item:nth-child(n+9){display:none}
+    .gallery-more{display:flex;justify-content:center;margin-top:2rem}
+    .gallery-toggle svg{width:18px;transition:transform .25s ease}
+    .gallery-toggle[aria-expanded="true"] svg{transform:rotate(180deg)}
 
     .closing{padding:0;background:var(--sand)}
     .closing-card{
@@ -744,6 +748,7 @@
       .flight-route:last-child{grid-column:auto}
       .story-video{max-height:290px}
       .dialog-videos{grid-template-columns:1fr}
+      .gallery-grid.is-collapsed .gallery-item:nth-child(n+7){display:none}
       .stay-gallery{grid-template-columns:1fr 1fr;grid-template-rows:310px 150px 150px}
       .stay-gallery figure:first-child{grid-column:1/-1;grid-row:auto;border-radius:26px 70px 26px 26px}
       .stay-gallery figure:not(:first-child){border-radius:20px}
@@ -1391,7 +1396,7 @@
           </a>
         </div>
 
-        <div class="gallery-grid">
+        <div class="gallery-grid is-collapsed" id="galleryGrid">
           <button class="gallery-item wide tall reveal" type="button" data-gallery="0"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-calle.webp" fetchpriority="low" alt="Calle de los paraguas en Guatapé" loading="lazy" decoding="async"></button>
           <button class="gallery-item reveal" type="button" data-gallery="1"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-letrero.webp" fetchpriority="low" alt="La Piedra del Peñol y su letrero" loading="lazy" decoding="async"></button>
           <button class="gallery-item tall reveal" type="button" data-gallery="2"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-puente.webp" fetchpriority="low" alt="Recorrido en cuatrimoto sobre un puente" loading="lazy" decoding="async"></button>
@@ -1410,6 +1415,12 @@
           <button class="gallery-item reveal" type="button" data-gallery="15"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-08.webp" fetchpriority="low" alt="Habitación real del hospedaje" loading="lazy" decoding="async"></button>
           <button class="gallery-item wide reveal" type="button" data-gallery="16"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-02.webp" fetchpriority="low" alt="Hospedaje y piscina al atardecer" loading="lazy" decoding="async"></button>
           <button class="gallery-item reveal" type="button" data-gallery="17"><img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-15.webp" fetchpriority="low" alt="Terraza con jacuzzi y vista al paisaje" loading="lazy" decoding="async"></button>
+        </div>
+        <div class="gallery-more">
+          <button class="btn btn-primary gallery-toggle" id="galleryToggle" type="button" aria-expanded="false" aria-controls="galleryGrid">
+            <span>Ver más fotos</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+          </button>
         </div>
       </div>
     </section>
@@ -1991,6 +2002,17 @@
       });
     }, { threshold: .6 });
     $$("[data-counter]").forEach(counter => counterObserver.observe(counter));
+
+    const galleryGrid = $("#galleryGrid");
+    const galleryToggle = $("#galleryToggle");
+    galleryToggle.addEventListener("click", () => {
+      const willExpand = galleryGrid.classList.contains("is-collapsed");
+      galleryGrid.classList.toggle("is-collapsed", !willExpand);
+      galleryToggle.setAttribute("aria-expanded", String(willExpand));
+      $("span", galleryToggle).textContent = willExpand ? "Ver menos" : "Ver más fotos";
+      if (willExpand) observeDeferredMedia(galleryGrid);
+      else $("#galeria").scrollIntoView({ behavior: "smooth", block: "start" });
+    });
 
     const lightbox = $("#lightbox");
     const lightboxImage = $("#lightboxImage");
