@@ -227,7 +227,10 @@
       background:var(--deep);box-shadow:var(--shadow-soft);isolation:isolate;
       transition:transform .35s ease,opacity .35s ease;
     }
-    .service-card.featured{grid-column:span 8}
+    .service-card.featured{grid-column:span 12}
+    .service-card.service-wide{grid-column:span 6}
+    .services-grid.is-filtered .service-card:not(.is-hidden){grid-column:span 6}
+    .services-grid.is-filtered .service-card.featured:not(.is-hidden){grid-column:span 12}
     .service-card.is-hidden{display:none}
     .service-card:hover{transform:translateY(-7px)}
     .service-card img{position:absolute;inset:0;height:100%;object-fit:cover;object-position:center;transition:transform .7s cubic-bezier(.2,.8,.2,1)}
@@ -254,6 +257,19 @@
     .service-open span{width:34px;height:34px;border-radius:50%;background:var(--orange);display:grid;place-items:center;transition:.25s ease}
     .service-open svg{width:16px}
     .service-card:hover .service-open span{transform:translateX(5px)}
+    .service-card.poster-card{min-height:0;display:flex;flex-direction:column;background:#052a27}
+    .service-card.poster-card>img{
+      position:relative;inset:auto;width:100%;height:auto!important;aspect-ratio:2/1;
+      object-fit:contain;object-position:center;background:#031f1d;flex:0 0 auto;
+    }
+    .service-card.poster-card::after{display:none}
+    .service-card.poster-card .service-content{
+      position:relative;left:auto;right:auto;bottom:auto;display:flex;flex-direction:column;
+      align-items:flex-start;flex:1;padding:1.35rem 1.55rem 1.5rem;
+    }
+    .service-card.poster-card .service-content h3{font-size:clamp(1.55rem,2.5vw,2.25rem)}
+    .service-card.poster-card .service-content p{margin:.5rem 0 1rem}
+    .service-card.poster-card .service-open{margin-top:auto}
 
     .nautical-section{background:var(--deep);color:#fff;overflow:hidden}
     .nautical-section::before{
@@ -515,6 +531,7 @@
     .closing-content{position:relative;z-index:2;padding:3rem;max-width:850px}
     .closing-content h2{font-size:clamp(3rem,7vw,6.8rem);font-weight:800;margin:1rem 0 1.2rem}
     .closing-content p{color:rgba(255,255,255,.82);font-size:1.08rem;max-width:570px;margin:0 auto 2rem}
+    .contact-actions{display:flex;justify-content:center;flex-wrap:wrap;gap:.8rem}
 
     footer{background:var(--deep);color:rgba(255,255,255,.7);padding:5rem 0 2rem;margin-top:7rem}
     .footer-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(255,255,255,.12)}
@@ -602,6 +619,7 @@
       .hero-visual{min-height:650px;width:min(760px,100%);margin-inline:auto}
       .service-card{grid-column:span 6}
       .service-card.featured{grid-column:span 12}
+      .service-card.service-wide{grid-column:span 6}
       .nautical-card,.nautical-card:nth-child(2){grid-column:span 6}
       .nautical-card:first-child{grid-column:span 12}
       .nautical-video{grid-template-columns:1fr}
@@ -677,6 +695,8 @@
       .services-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:0 16px 18px;gap:.85rem;scrollbar-width:none}
       .services-grid::-webkit-scrollbar{display:none}
       .service-card,.service-card.featured{min-width:84vw;min-height:480px;scroll-snap-align:center}
+      .service-card.poster-card,.service-card.poster-card.featured{min-height:0}
+      .service-card.poster-card>img{aspect-ratio:2/1}
       .service-card.featured img{height:100%;object-fit:cover;object-position:center}
       .service-card.featured::after{background:linear-gradient(180deg,rgba(6,45,43,0) 18%,rgba(6,45,43,.4) 48%,rgba(6,45,43,.98) 77%)}
       .nautical-grid{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;margin-inline:-16px;padding:0 16px 18px;gap:.85rem;scrollbar-width:none}
@@ -838,8 +858,8 @@
 
     <div class="marquee" aria-hidden="true">
       <div class="marquee-track">
-        <span>Guatapé <i></i> La Piedra <i></i> Jet Ski <i></i> Lanchas <i></i> Planchones <i></i> Helicóptero <i></i> Hospedaje <i></i></span>
-        <span>Guatapé <i></i> La Piedra <i></i> Jet Ski <i></i> Lanchas <i></i> Planchones <i></i> Helicóptero <i></i> Hospedaje <i></i></span>
+        <span>Guatapé <i></i> Helicóptero <i></i> Cuatrimotos <i></i> Paintball <i></i> Jet Ski <i></i> Lanchas <i></i> Hospedaje <i></i></span>
+        <span>Guatapé <i></i> Helicóptero <i></i> Cuatrimotos <i></i> Paintball <i></i> Jet Ski <i></i> Lanchas <i></i> Hospedaje <i></i></span>
       </div>
     </div>
 
@@ -848,76 +868,76 @@
         <div class="section-head reveal">
           <div class="section-copy">
             <span class="kicker">Todo lo que puedes descubrir</span>
-            <h2>Seis formas de vivir Guatapé</h2>
-            <p>Explora experiencias, destinos y opciones para completar tu visita, desde la aventura hasta el descanso.</p>
+            <h2>Seis experiencias para vivir Guatapé</h2>
+            <p>Elige tu aventura desde sus portadas principales y abre cada experiencia para conocer las fotografías reales.</p>
           </div>
           <div class="filters" role="group" aria-label="Filtrar experiencias">
             <button class="filter active" type="button" data-filter="all" aria-pressed="true">Todas</button>
             <button class="filter" type="button" data-filter="aire" aria-pressed="false">Aire</button>
             <button class="filter" type="button" data-filter="tierra" aria-pressed="false">Tierra</button>
-            <button class="filter" type="button" data-filter="destino" aria-pressed="false">Destinos</button>
+            <button class="filter" type="button" data-filter="agua" aria-pressed="false">Agua</button>
             <button class="filter" type="button" data-filter="estadia" aria-pressed="false">Hospedaje</button>
           </div>
         </div>
 
         <div class="services-grid" id="servicesGrid">
-          <article class="service-card featured reveal" data-category="aire">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-piedra.webp" fetchpriority="low" alt="Helicóptero sobrevolando la Piedra del Peñol" loading="lazy" decoding="async">
+          <article class="service-card poster-card featured reveal" data-category="aire">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-helicoptero.webp" fetchpriority="low" alt="Publicidad del vuelo en helicóptero sobre Guatapé" loading="lazy" decoding="async">
             <span class="service-number">01</span><span class="service-category">Aire</span>
             <div class="service-content">
               <h3>Vuelo en helicóptero</h3>
               <p>Sobrevuela la Piedra, el embalse y el proyecto del Cristo más grande del mundo desde una perspectiva única.</p>
-              <button class="service-open" type="button" data-service="helicoptero">Descubrir experiencia <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+              <button class="service-open" type="button" data-service="helicoptero">Ver publicidad y fotografías <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
 
-          <article class="service-card reveal" data-category="tierra">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/cuatrimoto-grupo.webp" fetchpriority="low" alt="Grupo durante una ruta en cuatrimoto" loading="lazy" decoding="async">
+          <article class="service-card poster-card service-wide reveal" data-category="tierra">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-cuatrimotos.webp" fetchpriority="low" alt="Publicidad de los paseos en cuatrimoto" loading="lazy" decoding="async">
             <span class="service-number">02</span><span class="service-category">Tierra</span>
             <div class="service-content">
               <h3>Ruta en cuatrimoto</h3>
               <p>Caminos rurales, bosque, montaña y miradores conectados en una experiencia sobre ruedas.</p>
-              <button class="service-open" type="button" data-service="cuatrimotos">Descubrir experiencia <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+              <button class="service-open" type="button" data-service="cuatrimotos">Ver publicidad y fotografías <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
 
-          <article class="service-card reveal" data-category="destino">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/piedra-letrero.webp" fetchpriority="low" alt="La Piedra del Peñol" loading="lazy" decoding="async">
-            <span class="service-number">03</span><span class="service-category">Destino</span>
+          <article class="service-card poster-card service-wide reveal" data-category="tierra">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-paintball.webp" fetchpriority="low" alt="Publicidad de la experiencia de Paintball" loading="lazy" decoding="async">
+            <span class="service-number">03</span><span class="service-category">Tierra</span>
             <div class="service-content">
-              <h3>La Piedra</h3>
-              <p>El gran referente del paisaje y una parada imprescindible para reconocer la identidad de la región.</p>
-              <button class="service-open" type="button" data-service="piedra">Descubrir lugar <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+              <h3>Paintball</h3>
+              <p>Una experiencia para compartir en grupo, consultar disponibilidad y conocer las condiciones del operador.</p>
+              <button class="service-open" type="button" data-service="paintball">Ver experiencia <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
 
-          <article class="service-card reveal" data-category="destino">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/pueblo-plaza.webp" fetchpriority="low" alt="Plaza colorida de Guatapé" loading="lazy" decoding="async">
-            <span class="service-number">04</span><span class="service-category">Destino</span>
+          <article class="service-card poster-card reveal" data-category="agua">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-jetski.webp" fetchpriority="low" alt="Publicidad de los paseos en Jet Ski" loading="lazy" decoding="async">
+            <span class="service-number">04</span><span class="service-category">Agua</span>
             <div class="service-content">
-              <h3>Pueblo de Guatapé</h3>
-              <p>Zócalos, fachadas, calles y rincones donde el color se convierte en parte del recorrido.</p>
-              <button class="service-open" type="button" data-service="pueblo">Descubrir lugar <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+              <h3>Paseos en Jet Ski</h3>
+              <p>Velocidad, paisaje y una experiencia acuática para recorrer el embalse de otra manera.</p>
+              <button class="service-open" type="button" data-service="jetski">Ver publicidad y fotografías <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
 
-          <article class="service-card reveal" data-category="destino">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/helicoptero-vista.webp" fetchpriority="low" alt="Vista aérea del embalse de Guatapé" loading="lazy" decoding="async">
-            <span class="service-number">05</span><span class="service-category">Destino</span>
+          <article class="service-card poster-card reveal" data-category="agua">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-lancha.webp" fetchpriority="low" alt="Publicidad de los paseos en lancha" loading="lazy" decoding="async">
+            <span class="service-number">05</span><span class="service-category">Agua</span>
             <div class="service-content">
-              <h3>Embalse de Guatapé</h3>
-              <p>Agua, islas y relieves que forman una de las panorámicas más especiales del destino.</p>
-              <button class="service-open" type="button" data-service="embalse">Descubrir lugar <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+              <h3>Paseos en lancha</h3>
+              <p>Comparte el paisaje, la brisa y el recorrido por el embalse con familia o amigos.</p>
+              <button class="service-open" type="button" data-service="lancha">Ver publicidad y fotografías <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
 
-          <article class="service-card reveal" data-category="estadia">
-            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/hotel-03.webp" fetchpriority="low" alt="Hospedaje junto a la Piedra del Peñol" loading="lazy" decoding="async">
+          <article class="service-card poster-card reveal" data-category="estadia">
+            <img src="data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" data-src="img/poster-hospedaje.webp" fetchpriority="low" alt="Publicidad de hoteles y cabañas en Guatapé" loading="lazy" decoding="async">
             <span class="service-number">06</span><span class="service-category">Hospedaje</span>
             <div class="service-content">
-              <h3>Hospedaje en Guatapé</h3>
+              <h3>Hoteles y cabañas</h3>
               <p>Explora espacios reales para descansar y completar tu experiencia según tus fechas y tipo de viaje.</p>
-              <button class="service-open" type="button" data-service="hospedaje">Ver opciones <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
+              <button class="service-open" type="button" data-service="hospedaje">Ver publicidad y fotografías <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></button>
             </div>
           </article>
         </div>
@@ -1311,10 +1331,10 @@
           <span class="kicker">Nuestra esencia</span>
           <h2>Un destino. Muchas formas de vivirlo.</h2>
           <p>En Aventura 360 nos apasiona crear experiencias inolvidables en uno de los destinos turísticos más hermosos de Colombia: Guatapé. Nuestro objetivo es ofrecer a cada visitante momentos únicos, combinando aventura, naturaleza, seguridad y un servicio de alta calidad.</p>
-          <p>Contamos con una amplia variedad de actividades para que disfrutes al máximo tu visita, como paseos en lancha, motos acuáticas (Jet Ski), vuelos panorámicos en helicóptero, recorridos en cuatrimoto y opciones de hospedaje cuidadosamente seleccionadas para garantizar una experiencia completa.</p>
+          <p>Contamos con una amplia variedad de actividades para que disfrutes al máximo tu visita, como paseos en lancha, motos acuáticas (Jet Ski), vuelos panorámicos en helicóptero, recorridos en cuatrimoto, Paintball y opciones de hospedaje cuidadosamente seleccionadas para garantizar una experiencia completa.</p>
           <p>Trabajamos con operadores y aliados confiables, brindando atención personalizada y acompañamiento durante todo el proceso de reserva. Ya sea que viajes en pareja, con amigos, en familia o en grupo, estamos comprometidos en hacer de tu visita a Guatapé un recuerdo inolvidable.</p>
           <div class="stats">
-            <div class="stat"><strong data-counter="11" data-suffix="">0</strong><span>experiencias, destinos y opciones para descubrir</span></div>
+            <div class="stat"><strong data-counter="12" data-suffix="">0</strong><span>experiencias, destinos y opciones para descubrir</span></div>
             <div class="stat"><strong data-counter="5" data-suffix="">0</strong><span>escenarios: pueblo, Piedra, tierra, agua y aire</span></div>
             <div class="stat"><strong data-counter="360" data-suffix="°">0</strong><span>una mirada completa de Guatapé</span></div>
             <div class="stat"><strong data-counter="1" data-suffix="">0</strong><span>destino conectado en un solo recorrido</span></div>
@@ -1367,10 +1387,15 @@
           <span class="kicker light">Tu próxima historia</span>
           <h2>Comienza en Guatapé.</h2>
           <p>Cuéntanos qué experiencia te llamó la atención y recibe toda la información directamente por WhatsApp.</p>
-          <a class="btn btn-wa" href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20planear%20mi%20experiencia%20en%20Guatap%C3%A9" target="_blank" rel="noopener">
-            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8L7 20.5A10 10 0 1 0 12 2Zm0 18.2A8.2 8.2 0 0 1 7.8 19l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.7 2.6 4 3.6 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3Z"/></svg>
-            Hablar por WhatsApp
-          </a>
+          <div class="contact-actions">
+            <a class="btn btn-wa" href="https://wa.me/573233896843?text=Hola%20Aventura%20360%2C%20quiero%20planear%20mi%20experiencia%20en%20Guatap%C3%A9" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15l-1.3 4.8L7 20.5A10 10 0 1 0 12 2Zm0 18.2A8.2 8.2 0 0 1 7.8 19l-.3-.2-2.9.8.8-2.8-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.4-.7-1.7-.8-.2-.1-.4-.1-.5.1-.2.2-.6.8-.8 1-.1.1-.3.2-.5 0-.2-.1-1-.4-1.9-1.2-.7-.6-1.2-1.4-1.3-1.6-.1-.2 0-.4.1-.5l.4-.4c.1-.1.2-.3.2-.4.1-.1 0-.3 0-.4l-.8-1.9c-.2-.5-.4-.4-.5-.4h-.5c-.2 0-.4.1-.6.3-.2.2-.8.8-.8 1.9s.8 2.2 1 2.4c.1.1 1.7 2.6 4 3.6 1.6.7 2.2.7 3 .6.5-.1 1.4-.6 1.6-1.1.2-.6.2-1 .1-1.1 0-.1-.2-.2-.4-.3Z"/></svg>
+              WhatsApp · 323 389 6843
+            </a>
+            <a class="btn btn-glass" href="https://wa.me/573006182215?text=Hola%20Aventura%20360%2C%20quiero%20planear%20mi%20experiencia%20en%20Guatap%C3%A9" target="_blank" rel="noopener">
+              WhatsApp · 300 618 2215
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -1384,7 +1409,7 @@
             <span class="brand-mark" aria-hidden="true"></span>
             <span class="brand-name">AVENTURA 360<small>VIVE MÁS · EXPLORA TODO</small></span>
           </div>
-          <p>Pueblo, Piedra, experiencias por tierra, aire y agua, más opciones de hospedaje en uno de los destinos más especiales de Colombia.</p>
+          <p>Pueblo, Piedra, experiencias por tierra, aire y agua, Paintball y opciones de hospedaje en uno de los destinos más especiales de Colombia.</p>
         </div>
         <div>
           <h4>Explora</h4>
@@ -1401,6 +1426,7 @@
           <ul>
             <li>Guatapé, Antioquia · Colombia</li>
             <li><a href="https://wa.me/573233896843" target="_blank" rel="noopener">WhatsApp · 323 389 6843</a></li>
+            <li><a href="https://wa.me/573006182215" target="_blank" rel="noopener">WhatsApp · 300 618 2215</a></li>
             <li>Información y reservas por WhatsApp</li>
           </ul>
         </div>
@@ -1502,17 +1528,25 @@
         category: "Experiencia de aire",
         title: "Vuelo en helicóptero",
         description: "Sobrevuela el proyecto del Cristo más grande del mundo y contempla desde el aire la Piedra del Peñol, la zona de embalses, fincas reconocidas y la réplica del Viejo Peñol.",
-        images: ["img/helicoptero-piedra.webp", "img/helicoptero-vista.webp", "img/helicoptero-cabina.webp", "img/helicoptero-poster.webp"],
-        alts: ["Helicóptero sobre La Piedra", "Vista del embalse desde la cabina", "Experiencia dentro del helicóptero", "Pieza visual del vuelo sobre El Peñol"],
+        images: ["img/poster-helicoptero.webp", "img/helicoptero-piedra.webp", "img/helicoptero-vista.webp", "img/helicoptero-cabina.webp"],
+        alts: ["Publicidad del vuelo sobre Guatapé", "Helicóptero sobre La Piedra", "Vista del embalse desde la cabina", "Experiencia dentro del helicóptero"],
         features: ["Proyecto del Cristo más grande del mundo", "Piedra, embalse, fincas y réplica del Viejo Peñol", "Atención personalizada y reserva por WhatsApp"]
       },
       cuatrimotos: {
         category: "Experiencia de tierra",
         title: "Ruta en cuatrimoto",
         description: "Recorre caminos entre árboles, montaña y agua. La galería reúne el trayecto en grupo, los pasos por terreno rural y distintos momentos frente al paisaje.",
-        images: ["img/cuatrimoto-grupo.webp", "img/cuatrimoto-bosque.webp", "img/cuatrimoto-puente.webp", "img/cuatrimoto-celebracion.webp", "img/cuatrimoto-companeros.webp", "img/cuatrimoto-salida.webp", "img/cuatrimoto-camino.webp", "img/cuatrimoto-ruta.webp", "img/cuatrimoto-lago.webp", "img/cuatrimoto-charco.webp", "img/cuatrimoto-paisaje.webp"],
-        alts: ["Grupo en cuatrimotos", "Ruta de cuatrimotos entre árboles", "Cuatrimoto sobre un puente", "Visitante celebrando en una cuatrimoto", "Compañeros durante el recorrido", "Salida en cuatrimoto", "Cuatrimoto en un camino rural", "Recorrido por la ruta", "Cuatrimoto junto al lago", "Cuatrimoto atravesando un camino con agua", "Cuatrimoto frente al paisaje"],
+        images: ["img/poster-cuatrimotos.webp", "img/cuatrimoto-grupo.webp", "img/cuatrimoto-bosque.webp", "img/cuatrimoto-puente.webp", "img/cuatrimoto-celebracion.webp", "img/cuatrimoto-companeros.webp", "img/cuatrimoto-salida.webp", "img/cuatrimoto-camino.webp", "img/cuatrimoto-ruta.webp", "img/cuatrimoto-lago.webp", "img/cuatrimoto-charco.webp", "img/cuatrimoto-paisaje.webp"],
+        alts: ["Publicidad de los paseos en cuatrimoto", "Grupo en cuatrimotos", "Ruta de cuatrimotos entre árboles", "Cuatrimoto sobre un puente", "Visitante celebrando en una cuatrimoto", "Compañeros durante el recorrido", "Salida en cuatrimoto", "Cuatrimoto en un camino rural", "Recorrido por la ruta", "Cuatrimoto junto al lago", "Cuatrimoto atravesando un camino con agua", "Cuatrimoto frente al paisaje"],
         features: ["Recorrido por caminos rurales", "Momentos individuales y en grupo", "Consulta y reserva directamente por WhatsApp"]
+      },
+      paintball: {
+        category: "Experiencia de tierra",
+        title: "Paintball",
+        description: "Una actividad para compartir en grupo y vivir una experiencia diferente en Guatapé. La disponibilidad, edad mínima, equipo de protección y condiciones se confirman directamente con el operador.",
+        images: ["img/poster-paintball.webp"],
+        alts: ["Publicidad de la experiencia de Paintball de Aventura 360"],
+        features: ["Actividad pensada para grupos", "Equipo y condiciones definidos por el operador", "Consulta de disponibilidad y requisitos por WhatsApp"]
       },
       piedra: {
         category: "Destino destacado",
@@ -1540,42 +1574,50 @@
       },
       hospedaje: {
         category: "Opciones de estadía",
-        title: "Hospedaje en Guatapé",
+        title: "Hoteles y cabañas en Guatapé",
         description: "Conoce fotografías reales de exteriores, habitaciones, zonas comunes y vistas. Te ayudamos a consultar una opción según tus fechas, el número de viajeros y el tipo de experiencia que buscas.",
-        images: hotelImages,
-        alts: hotelImages.map((_, index) => `Fotografía real del hospedaje ${index + 1}`),
+        images: ["img/poster-hospedaje.webp", ...hotelImages],
+        alts: ["Publicidad de hoteles y cabañas en Guatapé", ...hotelImages.map((_, index) => `Fotografía real del hospedaje ${index + 1}`)],
         features: ["19 fotografías reales organizadas en una sola galería", "Opciones para parejas, familias y grupos", "Disponibilidad y características confirmadas por WhatsApp"]
       },
       jetski: {
         category: "Experiencia náutica",
         title: "Jet Ski",
         description: "Explora el material real de la experiencia sobre el embalse, con la Piedra del Peñol y el paisaje de Guatapé como parte del recorrido.",
-        images: jetskiImages,
-        alts: jetskiImages.map((_, index) => `Fotografía real de la experiencia en Jet Ski ${index + 1}`),
+        images: ["img/poster-jetski.webp", ...jetskiImages],
+        alts: ["Publicidad de los paseos en Jet Ski", ...jetskiImages.map((_, index) => `Fotografía real de la experiencia en Jet Ski ${index + 1}`)],
         features: ["6 fotografías reales", "Recorrido y disponibilidad por confirmar", "Participación sujeta a edad mínima, requisitos del operador y elementos de seguridad"]
       },
       jetskiSencillo: {
         category: "Experiencia náutica",
         title: "Jet Ski sencillo",
         description: "Una opción individual para disfrutar el paisaje del embalse. Consulta previamente disponibilidad, recorrido y condiciones de participación.",
-        images: jetskiSimpleImages,
-        alts: jetskiSimpleImages.map((_, index) => `Fotografía real del Jet Ski sencillo ${index + 1}`),
+        images: ["img/poster-jetski.webp", ...jetskiSimpleImages],
+        alts: ["Publicidad de los paseos en Jet Ski", ...jetskiSimpleImages.map((_, index) => `Fotografía real del Jet Ski sencillo ${index + 1}`)],
         features: ["2 fotografías reales", "Condiciones confirmadas directamente con el operador", "Participación sujeta a edad mínima y requisitos de seguridad"]
+      },
+      lancha: {
+        category: "Experiencia náutica",
+        title: "Paseos en lancha",
+        description: "Conoce la publicidad principal y las fotografías reales de las embarcaciones disponibles para recorrer el embalse con familia o amigos.",
+        images: ["img/poster-lancha.webp", ...lancha7Images, ...lancha5Images],
+        alts: ["Publicidad de los paseos en lancha", ...lancha7Images.map((_, index) => `Fotografía real de la lancha para hasta siete personas ${index + 1}`), ...lancha5Images.map((_, index) => `Fotografía real de la lancha para hasta cinco personas ${index + 1}`)],
+        features: ["Opciones para grupos de diferentes tamaños", "5 fotografías reales de las embarcaciones", "Recorrido, capacidad y disponibilidad por confirmar"]
       },
       lancha7: {
         category: "Experiencia náutica",
         title: "Lancha para hasta 7 personas",
         description: "Una embarcación de mayor capacidad para compartir el recorrido por el embalse. Consulta disponibilidad y condiciones para tu grupo.",
-        images: lancha7Images,
-        alts: lancha7Images.map((_, index) => `Fotografía real de la lancha para hasta siete personas ${index + 1}`),
+        images: ["img/poster-lancha.webp", ...lancha7Images],
+        alts: ["Publicidad de los paseos en lancha", ...lancha7Images.map((_, index) => `Fotografía real de la lancha para hasta siete personas ${index + 1}`)],
         features: ["Capacidad máxima informada: 7 personas", "2 fotografías reales de sus espacios", "Recorrido y condiciones por confirmar"]
       },
       lancha5: {
         category: "Experiencia náutica",
         title: "Lancha para hasta 5 personas",
         description: "Una alternativa compacta para grupos pequeños, con fotografías reales y un video que permite conocer mejor la embarcación.",
-        images: lancha5Images,
-        alts: lancha5Images.map((_, index) => `Fotografía real de la lancha para hasta cinco personas ${index + 1}`),
+        images: ["img/poster-lancha.webp", ...lancha5Images],
+        alts: ["Publicidad de los paseos en lancha", ...lancha5Images.map((_, index) => `Fotografía real de la lancha para hasta cinco personas ${index + 1}`)],
         features: ["Capacidad máxima informada: 5 personas", "3 fotografías reales y video de la embarcación", "Recorrido y condiciones por confirmar"]
       },
       planchon: {
@@ -1699,6 +1741,7 @@
 
     const filters = $$(".filter");
     const serviceCards = $$(".service-card");
+    const servicesGrid = $("#servicesGrid");
     filters.forEach(filter => {
       filter.addEventListener("click", () => {
         const value = filter.dataset.filter;
@@ -1710,7 +1753,8 @@
         const visibleCards = serviceCards.filter(card => value === "all" || card.dataset.category === value);
         const featuredCard = value === "all"
           ? serviceCards.find(card => card.querySelector("[data-service='helicoptero']"))
-          : visibleCards.length <= 2 ? visibleCards[0] : null;
+          : visibleCards.length === 1 ? visibleCards[0] : null;
+        servicesGrid.classList.toggle("is-filtered", value !== "all");
         serviceCards.forEach(card => {
           const visible = visibleCards.includes(card);
           card.classList.toggle("is-hidden", !visible);
@@ -1764,6 +1808,11 @@
         <button class="dialog-thumb ${index === 0 ? "active" : ""}" type="button" data-dialog-image="${index}" aria-label="Ver imagen ${index + 1}">
           <img src="${mediaPlaceholder}" data-src="${image}" fetchpriority="low" alt="" loading="lazy" decoding="async">
         </button>`).join("");
+      const hasMultipleImages = data.images.length > 1;
+      $("#dialogPrev").hidden = !hasMultipleImages;
+      $("#dialogNext").hidden = !hasMultipleImages;
+      dialogCount.hidden = !hasMultipleImages;
+      dialogThumbs.hidden = !hasMultipleImages;
       observeDeferredMedia(dialogThumbs);
       dialogFeatures.innerHTML = data.features.map(feature => `<div class="dialog-feature"><span>✓</span>${feature}</div>`).join("");
       dialogWhatsApp.href = `https://wa.me/573233896843?text=${encodeURIComponent(`Hola Aventura 360, quiero información sobre ${data.title} en Guatapé`)}`;
